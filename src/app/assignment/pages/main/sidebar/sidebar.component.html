@@ -1,0 +1,16 @@
+<div class="grid">
+  <div class="col-3">
+    <div class="card layout-menu-plus">
+      <ng-container *ngFor="let item of model; let i = index;">
+        <div  class="layout-menu-title">{{item.label.toUpperCase()}}</div>
+        <div *ngFor="let el of item.items">
+         <div class="routeLink">
+           <i class="{{el.icon}}"></i>
+           <span [routerLink]="el.routerLink">{{el.label}}</span>
+         </div>
+        </div>
+
+      </ng-container>
+    </div>
+  </div>
+</div>

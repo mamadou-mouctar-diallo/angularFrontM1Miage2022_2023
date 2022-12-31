@@ -93,6 +93,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/assets/showcase/styles/app/app.scss",
               "src/styles.scss"
             ],
             "scripts": []
@@ -100,5 +101,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

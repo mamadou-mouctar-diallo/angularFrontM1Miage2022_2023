@@ -1,0 +1,133 @@
+<div *ngIf="assignments" class="grid">
+  <div class="col-12 lg:col-6 xl:col-3">
+    <div class="card mb-0">
+      <div class="flex justify-content-between mb-3">
+        <div>
+          <span class="block text-500 font-medium mb-3">Devoirs rendus</span>
+          <div class="text-900 font-medium text-xl">{{totalRenderedAssignment()}}</div>
+        </div>
+        <div class="flex align-items-center justify-content-center" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+          <i class="pi pi-check-circle green"></i>
+        </div>
+      </div>
+      <span class="text-green-500 font-medium">520  </span>
+      <span class="text-500">newly registered</span>
+    </div>
+  </div>
+  <div class="col-12 lg:col-6 xl:col-3">
+    <div class="card mb-0">
+      <div class="flex justify-content-between mb-3">
+        <div>
+          <span class="block text-500 font-medium mb-3">Devoirs en cours</span>
+          <div class="text-900 font-medium text-xl">{{totalAssignmentInDealine()}}</div>
+        </div>
+        <div class="flex align-items-center justify-content-center" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+          <i class="pi pi-clock orange"></i>
+        </div>
+      </div>
+      <span class="text-green-500 font-medium">520  </span>
+      <span class="text-500">newly registered</span>
+    </div>
+  </div>
+  <div class="col-12 lg:col-6 xl:col-3">
+    <div class="card mb-0">
+      <div class="flex justify-content-between mb-3">
+        <div>
+          <span class="block text-500 font-medium mb-3">Devoirs non rendus</span>
+          <div class="text-900 font-medium text-xl">{{totalAssignmentOutDealine()}}</div>
+        </div>
+        <div class="flex align-items-center justify-content-center" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+          <i class="pi pi-times-circle red"></i>
+        </div>
+      </div>
+      <span class="text-green-500 font-medium">520  </span>
+      <span class="text-500">newly registered</span>
+    </div>
+  </div>
+  <div class="col-12 lg:col-6 xl:col-3">
+    <div class="card mb-0">
+      <div class="flex justify-content-between mb-3">
+        <div>
+          <span class="block text-500 font-medium mb-3">Total de devoirs enregistrés</span>
+          <div class="text-900 font-medium text-xl">{{totalAssignments()}}</div>
+        </div>
+        <div class="flex align-items-center justify-content-center" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+          <i class="pi pi-inbox text-cyan-500 text-xl"></i>
+        </div>
+      </div>
+      <span class="text-green-500 font-medium">520  </span>
+      <span class="text-500">newly registered</span>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="card">
+      <p-dataView #assignmentContainer [value]="assignments" [paginator]="true" [rows]="9" filterBy="name" [sortField]="sortField" [sortOrder]="sortOrder" layout="grid">
+        <ng-template pTemplate="header">
+          <div class="flex flex-column md:flex-row md:justify-content-between gap-2">
+            <p-dropdown [options]="sortOptions" placeholder="Trier par en rendu" (onChange)="onSortChange($event)"></p-dropdown>
+            <span class="p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input type="search" pInputText placeholder="Rechercher nom de devoir" (input)="assignmentContainer.filter(assignmentName)"  [(ngModel)]="assignmentName" >
+                        </span>
+          </div>
+        </ng-template>
+
+        <ng-template let-assignment pTemplate="gridItem">
+          <div class="col-12 md:col-4">
+            <div class="card m-3 border-1 surface-border">
+              <div class="flex flex-wrap gap-2 align-items-center justify-content-between mb-2">
+                <div class="flex align-items-center">
+                  <i class="pi {{assignment.rendered ? 'pi-check-circle green' : getIcon(assignment.deadLine)}} mr-2" style="font-weight: bold; font-size: 2rem;"></i>
+                  <span class="font-semibold">{{assignment.rendered ? stateAssignement.rendered : getAssignmentState(assignment.deadLine)}}</span>
+                </div>
+                <span [class]="'product-badge status-' + assignment.deadLine">{{assignment.deadLine | date}}</span>
+              </div>
+              <div class="flex flex-column align-items-center text-center mb-3">
+                <img [src]="'assets/layout/images/logo_assignment.svg'" [alt]="assignment.name" class="w-9 shadow-2 my-3 mx-0"/>
+                <div class="text-2xl font-bold">{{assignment.name}}</div>
+                <div class="mb-3">{{assignment.comment}}</div>
+                <!--                <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating>-->
+              </div>
+              <div class="flex align-items-center justify-content-between">
+                <span class="text-2xl font-semibold">{{assignment.mark}}</span>
+                <p-button *ngIf="isThereASession"  icon="pi pi-external-link" label="Details" (click)="showModalDialog(assignment)"></p-button>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </p-dataView>
+    </div>
+  </div>
+</div>
+<p-dialog *ngIf="selectedAssignment" header="Details de l'assignment" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}"
+          [draggable]="false" [resizable]="false">
+  <ng-template pTemplate="body">
+    <p-divider></p-divider>
+    <h5 class="m-0">Infos du devoir</h5>
+    <div class=" card  mt-2">
+      <div class="flex justify-content-between">
+        <h6>{{selectedAssignment.name}}</h6>
+        <p>{{selectedAssignment.deadLine | date}}</p>
+      </div>
+      <p>
+        {{selectedAssignment.comment}}
+      </p>
+      <div *ngIf="!selectedAssignment.rendered && !isOutOfDeadLine(selectedAssignment.deadLine)" class="flex justify-content-end">
+        <button pButton class="p-button-success" (click)="rendre()">rendre</button>
+      </div>
+    </div>
+
+
+    <p-divider></p-divider>
+    <h5>Enseignement du devoir</h5>
+    <div class=" card  mt-2">
+      <div class="flex justify-content-between">
+        <h6>{{selectedAssignment.course.name}}</h6>
+      </div>
+    </div>
+    <p-divider></p-divider>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check" (click)="displayModal=false" label="Ok" styleClass="p-button-text"></p-button>
+  </ng-template>
+</p-dialog>

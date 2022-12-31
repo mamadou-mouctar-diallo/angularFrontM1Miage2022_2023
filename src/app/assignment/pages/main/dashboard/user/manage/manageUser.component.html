@@ -1,0 +1,13 @@
+<div class="grid">
+    <div class="card col-12 width-cover">
+      <div class="flex flex-column md:flex-row md:justify-content-between gap-2">
+        <button pButton class="p-button-plain" [routerLink]="['/addUser']"> <i class="pi pi-plus"></i>AddUser</button>
+        <button pButton class="p-button-danger"><i class="pi pi-trash"></i>Delete</button>
+        <button pButton class="p-button-warning"><i class="pi pi-pencil"></i>Update</button>
+        <button pButton class="p-button-warning"><i class="pi pi-list"></i>all users</button>
+      </div>
+    </div>
+    <div class="col-12">
+      <router-outlet></router-outlet>
+    </div>
+</div>
