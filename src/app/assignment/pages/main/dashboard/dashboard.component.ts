@@ -129,5 +129,8 @@ export class DashboardComponent implements OnInit{
       console.log(data)
     })
   }
+  isMarked(): boolean{
+    return this.selectedAssignment.mark !== null;
+  }
 }
 

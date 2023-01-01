@@ -83,13 +83,10 @@
                 <span [class]="'product-badge status-' + assignment.deadLine">{{assignment.deadLine | date}}</span>
               </div>
               <div class="flex flex-column align-items-center text-center mb-3">
-                <img [src]="'assets/layout/images/logo_assignment.svg'" [alt]="assignment.name" class="w-9 shadow-2 my-3 mx-0"/>
                 <div class="text-2xl font-bold">{{assignment.name}}</div>
-                <div class="mb-3">{{assignment.comment}}</div>
-                <!--                <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating>-->
+                <img [src]="'assets/layout/images/logo_assignment.svg'" [alt]="assignment.name" class="w-9 shadow-2 my-3 mx-0"/>
               </div>
-              <div class="flex align-items-center justify-content-between">
-                <span class="text-2xl font-semibold">{{assignment.mark}}</span>
+              <div class="flex align-items-center justify-content-end">
                 <p-button *ngIf="this.authService.isUserLogged()"  icon="pi pi-external-link" label="Details" (click)="showModalDialog(assignment)"></p-button>
               </div>
             </div>
@@ -114,8 +111,16 @@
         <p>{{selectedAssignment.deadLine | date}}</p>
       </div>
       <div class="flex justify-content-between">
+        <h6>Note du devoir:</h6>
+        <p>{{selectedAssignment.mark}}</p>
+      </div>
+      <div class="flex justify-content-between">
         <h6>Commentaire sur le devoir:</h6>
         <p>{{selectedAssignment.comment}}</p>
+      </div>
+      <div class="flex justify-content-between">
+        <h6>Nom de l'Etudiant:</h6>
+        <p>{{selectedAssignment.author}}</p>
       </div>
       <div *ngIf="!selectedAssignment.rendered && !isOutOfDeadLine(selectedAssignment.deadLine)" class="flex justify-content-between align-items-center">
         <h6>Bouton pour le rendre le devoir:</h6>

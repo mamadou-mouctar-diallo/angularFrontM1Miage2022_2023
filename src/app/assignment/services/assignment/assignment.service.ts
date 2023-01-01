@@ -49,7 +49,6 @@ export class AssignmentService implements Crud, OnInit{
   }
 
   upDateAssignment(assignment: Assignment): Observable<any>{
-    console.log(assignment)
     return this.http.put<any>(URL+this.prefix+'/update/'+assignment._id, assignment);
   };
   addAssignment(assignment : Assignment): Observable<String> {
