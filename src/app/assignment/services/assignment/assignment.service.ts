@@ -40,7 +40,7 @@ export class AssignmentService implements Crud, OnInit{
   }
 
   generateId(): string{
-    let id = 'ADV'+Date.now();
+    let id = 'avd'+Date.now();
     return id;
   }
 

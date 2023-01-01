@@ -16,8 +16,6 @@ export interface MenuItem {
     url?: string,
     separator?: boolean,
     routeLink?: any
-
-
 }
 
 export interface AppConfig {

@@ -63,7 +63,28 @@ a {
   border-radius: 15px;
   padding: 10px;
   margin-right: 10px;
+  //z-index: 2000;
+  //position: absolute;
 
+}
+
+.btn-home{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1rem;
+  padding: 1rem;
+  background: transparent;
+  border: 1px #0a1f3c solid;
+
+}
+
+.btn-home i, p{
+  margin-right: 10px;
+  color: #0a1f3c;
+  font-size: 1rem;
+  font-weight: bold;
 }
 
 .layout-menu-title{

@@ -3,15 +3,21 @@
     <img src="assets/layout/images/logo_assignment.svg" alt="logo">
   </a>
 
-  <button class="p-link layout-menu-button layout-topbar-button" (click)="toggleMenu()" >
+  <button *ngIf="this.configService.isMobile()" class="p-link layout-menu-button layout-topbar-button" (click)="toggleMenu()" >
     <i #menubutton class="pi pi-bars"></i>
   </button>
 
-  <button #topbarmenubutton class="p-link layout-topbar-menu-button layout-topbar-button" (click)="this.headerService.showProfileSibar()" >
+
+    <div pButton *ngIf="!this.authService.isUserLogged()" class="p-button-plain btn-home" (click)="goHome()" >
+      <i class="pi pi-home"></i>
+      <p>Accueil</p>
+    </div>
+
+  <button #topbarmenubutton class="p-link layout-topbar-menu-button layout-topbar-button" (click)="this.configService.showProfileSidebar()" >
     <i class="pi pi-ellipsis-v"></i>
   </button>
 
-  <div #topbarmenu class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active': this.headerService.state.profileSidebarVisible}" >
+  <div #topbarmenu class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active': this.configService.state.profileSidebarVisible}" >
     <button *ngIf="this.loginService.isUserLogged()" class="p-link layout-topbar-button" >
       <i class="pi pi-bell"></i>
       <span>Notifications</span>
@@ -20,11 +26,11 @@
       <i class="pi pi-envelope"></i>
       <span>Messages</span>
     </button>
-    <button class="p-link layout-topbar-button" (click)="logIn()">
+    <button class="p-link layout-topbar-button" (click)="this.loginService.isUserLogged()? profile(): logIn()">
       <i class="pi {{this.loginService.isUserLogged() ? 'pi-user' : 'pi-unlock red'}}"></i>
       <span>{{this.loginService.isUserLogged() ? 'Profile' : 'Connexion'}}</span>
     </button>
-    <p-divider *ngIf="showDivider"></p-divider>
+    <p-divider *ngIf="this.configService.isMobile()"></p-divider>
     <button *ngIf="this.loginService.isUserLogged()" class="p-link layout-topbar-button" (click)="logOut()">
       <i class="pi pi-fw pi-power-off red"></i>
       <span>Deconnexion</span>

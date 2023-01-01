@@ -1,12 +1,12 @@
 import {Injectable} from "@angular/core";
-import {LoginService} from "./login/login.service";
+import {AuthService} from "./auth/auth.service";
 
 @Injectable({
   providedIn: "root"
 })
 
 export class SessionService {
-  constructor(private _login: LoginService) {
+  constructor(private _login: AuthService) {
   }
 
   isSessionUp(): boolean{

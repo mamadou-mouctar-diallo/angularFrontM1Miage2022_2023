@@ -90,7 +90,7 @@
               </div>
               <div class="flex align-items-center justify-content-between">
                 <span class="text-2xl font-semibold">{{assignment.mark}}</span>
-                <p-button *ngIf="isThereASession"  icon="pi pi-external-link" label="Details" (click)="showModalDialog(assignment)"></p-button>
+                <p-button *ngIf="this.authService.isUserLogged()"  icon="pi pi-external-link" label="Details" (click)="showModalDialog(assignment)"></p-button>
               </div>
             </div>
           </div>
@@ -106,23 +106,30 @@
     <h5 class="m-0">Infos du devoir</h5>
     <div class=" card  mt-2">
       <div class="flex justify-content-between">
-        <h6>{{selectedAssignment.name}}</h6>
+        <h6>Nom du devoir à rendre:</h6>
+        <p>{{selectedAssignment.name}}</p>
+      </div>
+      <div class="flex justify-content-between">
+        <h6>Date de rendu:</h6>
         <p>{{selectedAssignment.deadLine | date}}</p>
       </div>
-      <p>
-        {{selectedAssignment.comment}}
-      </p>
-      <div *ngIf="!selectedAssignment.rendered && !isOutOfDeadLine(selectedAssignment.deadLine)" class="flex justify-content-end">
+      <div class="flex justify-content-between">
+        <h6>Commentaire sur le devoir:</h6>
+        <p>{{selectedAssignment.comment}}</p>
+      </div>
+      <div *ngIf="!selectedAssignment.rendered && !isOutOfDeadLine(selectedAssignment.deadLine)" class="flex justify-content-between align-items-center">
+        <h6>Bouton pour le rendre le devoir:</h6>
         <button pButton class="p-button-success" (click)="rendre()">rendre</button>
       </div>
     </div>
 
 
     <p-divider></p-divider>
-    <h5>Enseignement du devoir</h5>
+    <h5>Infos sur l'enseignement du devoir</h5>
     <div class=" card  mt-2">
       <div class="flex justify-content-between">
-        <h6>{{selectedAssignment.course.name}}</h6>
+        <h6>Nom du cours</h6>
+        <p>{{selectedAssignment.course.name}}</p>
       </div>
     </div>
     <p-divider></p-divider>

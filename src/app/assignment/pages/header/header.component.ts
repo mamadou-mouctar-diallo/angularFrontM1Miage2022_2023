@@ -1,32 +1,19 @@
-import {Component, ElementRef, Renderer2, ViewChild} from "@angular/core";
-import {LoginService} from "../../services/login/login.service";
+import {Component, ElementRef, OnInit, Renderer2, ViewChild} from "@angular/core";
+import {AuthService} from "../../services/auth/auth.service";
 import {Router} from "@angular/router";
-import {HeaderService} from "../../services/header/header.service";
 import {Sidebar} from "primeng/sidebar";
-import {UserService} from "../../services/user/user.service";
+import {ConfigService} from "../../services/config.service";
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html'
 })
 
-export class HeaderComponent {
+export class HeaderComponent implements OnInit{
   @ViewChild('menubutton') menubutton!: ElementRef;
   @ViewChild('sidebar') sidebar!: Sidebar;
   showDivider: boolean = false;
-  constructor(public loginService: LoginService, private route: Router, public headerService : HeaderService, private renderer: Renderer2) {
-    //
-    // this.renderer.listen('window', 'click', (e : Event) => {
-    //   if(e.target !== this.menubutton.nativeElement && this.sidebar !== undefined && e.target != this.sidebar.container){
-    //     this.opened = false;
-    //     console.log(this.opened);
-    //   }
-    // })
-    // if(window.document.documentElement.clientWidth <= 576){
-    //   this.showDivider = true;
-    // }else{
-    //   this.showDivider = false;
-    // }
+  constructor(public loginService: AuthService, private route: Router, public configService: ConfigService, public authService: AuthService) {
   }
 
   opened: boolean = false;
@@ -39,7 +26,20 @@ export class HeaderComponent {
   }
 
   toggleMenu() {
-    this.opened = !this.opened;
-    console.log(this.opened)
+    this.configService.onMenuToggle();
+  }
+
+  ngOnInit(): void {
+
+    console.log(this.configService.isMobile());
+    console.log(window.innerWidth)
+  }
+
+  profile() {
+
+  }
+
+  goHome() {
+    this.route.navigate(['']).then(e => console.log(e));
   }
 }

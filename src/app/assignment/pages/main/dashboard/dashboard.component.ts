@@ -1,9 +1,9 @@
 import {Component, ElementRef, OnInit} from "@angular/core";
-import {DashbordService, Product} from "../../../services/dashbord.service";
 import {MessagesService} from "../../../services/messages.service";
 import {Assignment} from "../../../models/assignment";
 import {MenuItem} from "../../../interfaces/interfaces";
 import {AssignmentService} from "../../../services/assignment/assignment.service";
+import {AuthService} from "../../../services/auth/auth.service";
 
 export interface SelectedItem{ label: string, value: string }
 export interface StateAssignment {
@@ -20,12 +20,11 @@ export interface StateAssignment {
 export class DashboardComponent implements OnInit{
   title = 'frontend';
   items!: MenuItem[];
-  products!: Product[];
   sortKey: any;
   assignments!: Assignment[];
   stateAssignement!: { onTime: string; rendered: string; pastTime: string };
   isThereASession: boolean = false;
-  constructor(private messagesService: MessagesService, private dashbordService: DashbordService, private assignmentService: AssignmentService) {
+  constructor(private messagesService: MessagesService, public authService: AuthService, private assignmentService: AssignmentService) {
   }
   ngOnInit(): void {
     this.sortOptions = [
@@ -40,7 +39,6 @@ export class DashboardComponent implements OnInit{
       rendered: "Devoir rendu",
       pastTime: "Délais du devoir passé"
     }
-    this.isThereASession = this.dashbordService.isThereASession();
   }
 
   selectedAssignment!: Assignment;

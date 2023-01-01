@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from "@angular/core";
-import {LoginService} from "../../services/login/login.service";
+import {AuthService} from "../../services/auth/auth.service";
 import {AssignmentService} from "../../services/assignment/assignment.service";
 import {Assignment} from "../../models/assignment";
 import {Router} from "@angular/router";
@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit, AfterViewInit{
   message!: string;
   private assignments?: Assignment[];
   @ViewChild('toast')toast!: any;
-  constructor(private loginService: LoginService, private assignmentService: AssignmentService, private route: Router) {
+  constructor(private loginService: AuthService, private assignmentService: AssignmentService, private route: Router) {
   }
 
   ngAfterViewInit(): void {
@@ -24,13 +24,14 @@ export class LoginComponent implements OnInit, AfterViewInit{
     }
 
   onSubmit() {
-    console.log(this.email)
-    this.loginService.makeSession({email: this.email, password: this.password}).subscribe(token => {
-      console.log(token)
-      localStorage.setItem('token', token);
-      // if(this.loginService.isUserAuthorized()){
-        this.route.navigate(['']).then(err => console.log(err))
-      // }
+    this.loginService.makeSession({email: this.email, password: this.password}).subscribe(data => {
+      console.log(data)
+     if(data.msg.startsWith('Bearer')){
+       localStorage.setItem('token', data.msg);
+       this.route.navigate(['']).then(err => console.log(err))
+     }else {
+       this.message = data.msg;
+     }
     });
   }
 

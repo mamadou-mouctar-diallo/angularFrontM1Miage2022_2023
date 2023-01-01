@@ -10,8 +10,7 @@ import {ProtectService} from "../protect.service";
 @Injectable({
   providedIn: 'root',
 })
-export class LoginService {
-  token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJkaWFsbG8zOUB5YWhvby5mciIsInJvbGUiOiJzdHVkZW50IiwiaWF0IjoxNjcyNDQ1Mjg0LCJleHAiOjE2NzI0NDg4ODR9.Y_lqlwA3L31kwGAC08SaPzA77vPraGOnEaHJ4r8YvI8"
+export class AuthService {
   constructor(private router: Router, private http: HttpClient, private protectService: ProtectService) {
   }
   httpHeaders(token: string){
