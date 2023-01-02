@@ -42,6 +42,10 @@ import {NetworkInterceptor} from "./network.interceptor";
 import {ToastModule} from "primeng/toast";
 import {ManageUserModule} from "./assignment/pages/main/dashboard/user/manage/manageUser.module";
 import {ToolbarModule} from "primeng/toolbar";
+import {InputNumberModule} from "primeng/inputnumber";
+import {RadioButtonModule} from "primeng/radiobutton";
+import {InputTextareaModule} from "primeng/inputtextarea";
+import {CalendarModule} from "primeng/calendar";
 
 const routes: Routes = [
   {path: '', component: DashboardComponent},
@@ -93,7 +97,11 @@ const routes: Routes = [
     ProgressSpinnerModule,
     ToastModule,
     ManageUserModule,
-    ToolbarModule
+    ToolbarModule,
+    InputNumberModule,
+    RadioButtonModule,
+    InputTextareaModule,
+    CalendarModule
   ],
   providers: [AssignmentService, MessagesService,{
     provide: HTTP_INTERCEPTORS,

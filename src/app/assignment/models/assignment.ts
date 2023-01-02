@@ -1,5 +1,4 @@
 export interface Assignment {
-  _id?: string,
   id: String,
   name: String,
   deadLine: Date,

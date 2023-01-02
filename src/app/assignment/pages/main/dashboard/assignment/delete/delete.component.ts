@@ -10,11 +10,14 @@ import {Assignment} from "../../../../../models/assignment";
 
 export class DeleteComponent implements OnInit{
   assignments!: Assignment[];
+  assignmentToDelete!: Assignment;
+  modalDisplayed: boolean = false;
   constructor(private assignmentService: AssignmentService) {
   }
 
-  deleteProduct(assignment: any) {
-
+  deleteAssignment(assignment: Assignment) {
+    this.assignmentToDelete = assignment
+    this.modalDisplayed = true;
   }
 
   onGlobalFilter(dt: Table, $event: Event) {
@@ -23,5 +26,14 @@ export class DeleteComponent implements OnInit{
 
   ngOnInit(): void {
     this.assignmentService.getAssignments().subscribe(assignments => this.assignments = assignments);
+  }
+
+  confirmDelete() {
+    this.modalDisplayed = false;
+
+  }
+  cancelDelete(){
+    this.modalDisplayed = false;
+
   }
 }

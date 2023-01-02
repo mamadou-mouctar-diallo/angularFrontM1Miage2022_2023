@@ -11,6 +11,9 @@ import {Assignment} from "../../../../../models/assignment";
 export class UpdateComponent implements OnInit{
   assignments!: Assignment[];
   assignmentName: any;
+  assignmentToEdit!: Assignment;
+  submitted: boolean = false;
+  modalDisplayed: boolean = false;
   constructor(public assignmentService: AssignmentService) {
   }
 
@@ -18,8 +21,10 @@ export class UpdateComponent implements OnInit{
     // dt.(assignmentName, 'contains');
   }
 
-  editProduct(assignment: any) {
-
+  editAssignment(assignment: Assignment) {
+    console.log(assignment)
+    this.assignmentToEdit = assignment;
+    this.modalDisplayed = true;
   }
 
   deleteProduct(assignment: any) {
@@ -28,5 +33,14 @@ export class UpdateComponent implements OnInit{
 
   ngOnInit(): void {
     this.assignmentService.getAssignments().subscribe(assignments => this.assignments = assignments);
+  }
+
+  saveEdit() {
+    console.log(this.assignmentToEdit)
+    this.modalDisplayed = false;
+
+  }
+  cancelEdit(){
+    this.modalDisplayed = false;
   }
 }

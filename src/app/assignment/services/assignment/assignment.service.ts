@@ -6,7 +6,7 @@ import {Crud} from "../../interfaces/crud";
 import {URL} from "../../utils/utils";
 
 @Injectable()
-export class AssignmentService implements Crud, OnInit{
+export class AssignmentService implements OnInit{
   assignments!: any [];
   assignmentsPrepared!: Assignment [];
   assignmentTemp!: Assignment;
@@ -16,21 +16,9 @@ export class AssignmentService implements Crud, OnInit{
     this.URL = URL;
   }
 
-  add() {
-        throw new Error("Method not implemented.");
-    }
-    getAll() {
-        throw new Error("Method not implemented.");
-    }
-    getOne() {
-        throw new Error("Method not implemented.");
-    }
-    update() {
-        throw new Error("Method not implemented.");
-    }
-    delete() {
-        throw new Error("Method not implemented.");
-    }
+  getAssignmentsLocal(): Observable<Assignment[]>{
+    return this.http.get<Assignment[]>('assets/demo/data/assignment.json');
+  }
 
   ngOnInit(): void {
     this.getAssignments().subscribe(assignments => this.assignments = assignments);
@@ -49,10 +37,10 @@ export class AssignmentService implements Crud, OnInit{
   }
 
   upDateAssignment(assignment: Assignment): Observable<any>{
-    return this.http.put<any>(URL+this.prefix+'/update/'+assignment._id, assignment);
+    return this.http.put<any>(URL+this.prefix+'/update/'+assignment.id, assignment);
   };
   addAssignment(assignment : Assignment): Observable<String> {
-     return this.http.post<String>(this.URL, assignment);
+     return this.http.post<String>(URL+this.prefix+'/add', assignment);
   }
 
 }

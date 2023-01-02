@@ -34,12 +34,19 @@ export class DashboardComponent implements OnInit{
     this.assignmentService.getAssignments().subscribe(assignments =>{
       this.assignments = assignments;
     });
+    this.assignmentService.getAssignmentsLocal().subscribe(assignments => this.assignmentLocal = assignments);
     this.stateAssignement = {
       onTime: "Devoir en cours",
       rendered: "Devoir rendu",
       pastTime: "Délais du devoir passé"
     }
   }
+  cours: string [] = ['algebre.png', 'anglais.png', 'gestion_financiere.png','intelligence_artificielle.png','management_si.png','math_analyse.png', 'math_big_data.png',
+  'web.png'
+  ]
+  profs: string[] = ['prof1.png', 'prof2.png', 'prof3.png', 'prof4.png', 'prof5.png', 'prof6.png', 'prof7.png']
+
+  assignmentLocal!: Assignment[];
 
   selectedAssignment!: Assignment;
 
@@ -86,6 +93,10 @@ export class DashboardComponent implements OnInit{
     let currentDate = new Date(date);
     let deaLine = new Date(deadLine);
     return currentDate > deaLine;
+  }
+
+  getIntex(size: number): number{
+    return Math.floor((Math.random() * size));
   }
 
   getAssignmentState(deadLine: Date): string{
