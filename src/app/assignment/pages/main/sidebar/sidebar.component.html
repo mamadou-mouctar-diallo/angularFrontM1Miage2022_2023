@@ -1,4 +1,4 @@
-<div *ngIf="!this.configService.isMobile()" class="card layout-menu-plus {{this.configService.isMobile()}} layout-mobile">
+<div *ngIf="this.configService.isDesktop()" class="card layout-menu-plus {{this.configService.isMobile()}}">
   <ng-container *ngFor="let item of model; let i = index;">
     <div  class="layout-menu-title">{{item.label.toUpperCase()}}</div>
     <div *ngFor="let el of item.items">
@@ -10,3 +10,22 @@
 
   </ng-container>
 </div>
+<p-sidebar *ngIf="this.configService.isMobile()" [(visible)]="this.configService.isOpenedMenu">
+
+
+<ng-template pTemplate="header"><h2>Menu principal</h2></ng-template>
+<ng-template pTemplate="content">
+  <div class="layout-mobile">
+  <ng-container *ngFor="let item of model; let i = index;">
+    <div  class="layout-menu-title">{{item.label.toUpperCase()}}</div>
+    <div *ngFor="let el of item.items">
+      <div class="routeLink">
+        <i class="{{el.icon}}"></i>
+        <span [routerLink]="el.routerLink">{{el.label}}</span>
+      </div>
+    </div>
+
+  </ng-container>
+</div>
+</ng-template>
+</p-sidebar>

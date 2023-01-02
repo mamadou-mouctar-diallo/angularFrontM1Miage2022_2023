@@ -1,1 +1,34 @@
-<h2>Add assignments works</h2>
+<div class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
+  <div class="flex flex-column align-items-center justify-content-center">
+    <div class="border-blue">
+      <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius:53px">
+        <div class="text-center mb-5">
+          <img src="assets/layout/images/logo_assignment.svg" alt="Image" height="50" class="mb-3">
+          <div class="text-900 text-3xl font-medium mb-3">Bienvenue la page d'authentification</div>
+          <span class="text-600 font-medium">Connectez-vous pour continuer</span>
+        </div>
+
+        <div *ngFor="let form of forms">
+          <div *ngIf="form.visible" style="{{form.styleClasse}}">
+            <label for="email" class="block text-900 text-xl font-medium mb-2">Email</label>
+            <input id="email" type="text" [(ngModel)]="email" placeholder="Adresse mail" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem" name="email">
+
+            <label for="password" class="block text-900 font-medium text-xl mb-2">Mot de passe</label>
+            <p-password id="password" placeholder="Mot de passe" [toggleMask]="true" styleClass="mb-5" inputStyleClass="w-full p-3 md:w-30rem" name="password"></p-password>
+
+          </div>
+        </div>
+        <div class="flex align-items-center justify-content-between mb-5 gap-5">
+          <div class="flex align-items-center">
+            <button pButton pRipple label="previous" class="w-full p-3 text-xl p-button-outlined p-button-secondary" (click)="this.previousForm()"></button>
+          </div>
+          <div class="flex align-items-center">
+            <button pButton label="next" class="w-full p-3 text-xl p-button-outlined" (click)="this.nextForm()"></button>
+          </div>
+        </div>
+        <button pButton pRipple label="Sign In" class="w-full p-3 text-xl" (click)="this.nextForm()"></button>
+      </div>
+    </div>
+  </div>
+</div>
+

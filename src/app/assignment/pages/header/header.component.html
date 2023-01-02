@@ -3,7 +3,7 @@
     <img src="assets/layout/images/logo_assignment.svg" alt="logo">
   </a>
 
-  <button *ngIf="this.configService.isMobile()" class="p-link layout-menu-button layout-topbar-button" (click)="toggleMenu()" >
+  <button *ngIf="this.configService.isMobile() && this.authService.isUserLogged()" class="p-link layout-menu-button layout-topbar-button" (click)="toggleMenu()" >
     <i #menubutton class="pi pi-bars"></i>
   </button>
 
@@ -30,7 +30,7 @@
       <i class="pi {{this.loginService.isUserLogged() ? 'pi-user' : 'pi-unlock red'}}"></i>
       <span>{{this.loginService.isUserLogged() ? 'Profile' : 'Connexion'}}</span>
     </button>
-    <p-divider *ngIf="this.configService.isMobile()"></p-divider>
+    <p-divider *ngIf="this.configService.isMobile() && this.authService.isUserLogged()"></p-divider>
     <button *ngIf="this.loginService.isUserLogged()" class="p-link layout-topbar-button" (click)="logOut()">
       <i class="pi pi-fw pi-power-off red"></i>
       <span>Deconnexion</span>

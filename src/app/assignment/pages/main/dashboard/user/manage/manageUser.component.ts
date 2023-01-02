@@ -6,5 +6,17 @@ import {Component} from "@angular/core";
 })
 
 export class ManageUserComponent {
-  
+
+  addUser() {
+
+  }
+  deleteUser(){
+
+  }
+  editUser(){
+
+  }
+  allUsers(){
+
+  }
 }

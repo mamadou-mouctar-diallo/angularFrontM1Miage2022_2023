@@ -41,6 +41,7 @@ import {ProgressSpinnerModule} from "primeng/progressspinner";
 import {NetworkInterceptor} from "./network.interceptor";
 import {ToastModule} from "primeng/toast";
 import {ManageUserModule} from "./assignment/pages/main/dashboard/user/manage/manageUser.module";
+import {ToolbarModule} from "primeng/toolbar";
 
 const routes: Routes = [
   {path: '', component: DashboardComponent},
@@ -67,32 +68,33 @@ const routes: Routes = [
     LoaderComponent,
     ManageUserComponent,
   ],
-    imports: [
-        FormsModule,
-        BrowserModule,
-        PasswordModule,
-        CheckboxModule,
-        RouterLink,
-        ButtonModule,
-        RippleModule,
-        InputTextModule,
-        BrowserAnimationsModule,
-        HttpClientModule,
-        TableModule,
-        MenuModule,
-        ChartModule,
-        SplitButtonModule,
-        RatingModule,
-        DropdownModule,
-        DataViewModule,
-        RouterModule.forRoot(routes),
-        DividerModule,
-        DialogModule,
-        SidebarModule,
-        ProgressSpinnerModule,
-        ToastModule,
-      ManageUserModule
-    ],
+  imports: [
+    FormsModule,
+    BrowserModule,
+    PasswordModule,
+    CheckboxModule,
+    RouterLink,
+    ButtonModule,
+    RippleModule,
+    InputTextModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    TableModule,
+    MenuModule,
+    ChartModule,
+    SplitButtonModule,
+    RatingModule,
+    DropdownModule,
+    DataViewModule,
+    RouterModule.forRoot(routes),
+    DividerModule,
+    DialogModule,
+    SidebarModule,
+    ProgressSpinnerModule,
+    ToastModule,
+    ManageUserModule,
+    ToolbarModule
+  ],
   providers: [AssignmentService, MessagesService,{
     provide: HTTP_INTERCEPTORS,
     useClass: NetworkInterceptor,

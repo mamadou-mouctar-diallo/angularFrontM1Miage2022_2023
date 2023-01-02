@@ -1,1 +1,50 @@
-<h2>Delete assignments works</h2>
+<div class="grid">
+  <div class="col-12">
+    <div class="card px-6 py-6">
+      <p-table #dt [value]="assignments"  responsiveLayout="scroll" [rows]="10"  [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true">
+        <ng-template pTemplate="caption">
+          <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+            <h5 class="m-0">Gestion des assignments</h5>
+            <span class="block mt-2 md:mt-0 p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."  class="w-full sm:w-auto"/>
+                        </span>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th >Nom</th>
+            <th >Auteur</th>
+            <th >Matière</th>
+            <th></th>
+            <th>Action</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-assignment>
+          <tr>
+            <td style="width:14%; min-width:10rem;">
+              <span class="p-column-title">Name</span>
+              {{assignment.name}}
+            </td>
+            <td style="width:14%; min-width:8rem;">
+              <span class="p-column-title">Auteur</span>
+              {{assignment.author}}
+            </td>
+            <td style="width:14%; min-width:10rem;">
+              <span class="p-column-title">Matière</span>
+              {{assignment.course.name}}
+            </td>
+            <td style="width:14%; min-width:10rem;"><span class="p-column-title">Image</span>
+              <img [src]="'assets/layout/images/logo_assignment.svg'" [alt]="assignment.name" width="100" class="shadow-4" />
+            </td>
+            <td>
+              <div class="flex">
+                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct(assignment)"></button>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>
