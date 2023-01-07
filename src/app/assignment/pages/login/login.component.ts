@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit, AfterViewInit{
   onSubmit() {
     this.loginService.makeSession({email: this.email, password: this.password}).subscribe(data => {
       console.log(data)
-     if(data.msg.startsWith('Bearer')){
+     if(data.msg.startsWith('bearer')){
        localStorage.setItem('token', data.msg);
        this.route.navigate(['']).then(err => console.log(err))
      }else {

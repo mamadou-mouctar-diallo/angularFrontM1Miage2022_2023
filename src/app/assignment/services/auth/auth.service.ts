@@ -13,14 +13,6 @@ import {ProtectService} from "../protect.service";
 export class AuthService {
   constructor(private router: Router, private http: HttpClient, private protectService: ProtectService) {
   }
-  httpHeaders(token: string){
-    return {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: token
-      })
-    }
-  }
 
   isUserLogged(): boolean {
     return localStorage.getItem('token') != null;
@@ -46,6 +38,10 @@ export class AuthService {
       }
     }
     return false;
+  }
+
+  getToken(): string{
+    return localStorage.getItem('token') || 'vide';
   }
 
   decodeTheToken(token: string){

@@ -10,12 +10,13 @@ import {Assignment} from "../../../../../models/assignment";
 
 export class DeleteComponent implements OnInit{
   assignments!: Assignment[];
-  assignmentToDelete!: Assignment;
+  assignmentToDelete!: any;
   modalDisplayed: boolean = false;
   constructor(private assignmentService: AssignmentService) {
   }
 
-  deleteAssignment(assignment: Assignment) {
+  deleteAssignment(assignment: any) {
+    console.log(assignment)
     this.assignmentToDelete = assignment
     this.modalDisplayed = true;
   }
@@ -29,6 +30,7 @@ export class DeleteComponent implements OnInit{
   }
 
   confirmDelete() {
+    this.assignmentService.deleteAssignment(this.assignmentToDelete._id).subscribe(msg => console.log(msg))
     this.modalDisplayed = false;
 
   }
