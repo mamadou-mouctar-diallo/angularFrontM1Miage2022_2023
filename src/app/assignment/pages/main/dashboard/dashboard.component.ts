@@ -50,19 +50,6 @@ export class DashboardComponent implements OnInit{
 
   selectedAssignment!: Assignment;
 
-  save(assignment: Assignment): void {
-    this.assignmentService.addAssignment(assignment).subscribe(msg => console.log(msg));
-    this.assignmentService.getOneAssignment(assignment.id).subscribe(assignment => console.log(assignment))
-  }
-
-  update() {
-    this.messagesService.add({severity:'success', summary:'Success', detail:'Data Updated'});
-  }
-
-  delete() {
-    this.messagesService.add({severity:'success', summary:'Success', detail:'Data Deleted'});
-  }
-
   sortOptions!: SelectedItem[] ;
 
   sortOrder!: number;
@@ -143,5 +130,6 @@ export class DashboardComponent implements OnInit{
   isMarked(): boolean{
     return this.selectedAssignment.mark !== null;
   }
+
 }
 

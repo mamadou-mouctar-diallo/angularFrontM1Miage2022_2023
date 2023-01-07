@@ -123,3 +123,23 @@
     </p-dialog>
   </div>
 </div>
+
+<p-dialog [(visible)]="displayModalAuthorization" header="Autorisation" [modal]="true" [style]="{width:'450px'}">
+  <div class="flex align-items-center justify-content-center">
+    <i class="pi pi-exclamation-triangle mr-3 red" style="font-size: 2rem"></i>
+    <span *ngIf="message" class="red">{{message}}</span>
+  </div>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple icon="pi pi-check" class="p-button-text" label="D'accord" (click)="closeModalAuthorization()"></button>
+  </ng-template>
+</p-dialog>
+
+<p-dialog [(visible)]="displayModalModification" header="Modification" [modal]="true" [style]="{width:'450px'}">
+  <div class="flex align-items-center justify-content-center">
+    <i class="pi pi-check mr-3 green" style="font-size: 2rem"></i>
+    <span *ngIf="message" class="green">{{message}}</span>
+  </div>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple icon="pi pi-check" class="p-button-text" label="D'accord" (click)="closeModalModification()"></button>
+  </ng-template>
+</p-dialog>
