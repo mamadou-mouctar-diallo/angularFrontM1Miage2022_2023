@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import {FormsModule} from "@angular/forms";
 import {RouterModule, Routes} from "@angular/router";
 
-
 import {FooterComponent} from "./assignment/pages/footer/footer.component";
 import {HeaderComponent} from "./assignment/pages/header/header.component";
 import {DashboardComponent} from "./assignment/pages/main/dashboard/dashboard.component";
@@ -42,6 +41,8 @@ import {NetworkInterceptor} from "./network.interceptor";
 import {ToastModule} from "primeng/toast";
 import {ManageUserModule} from "./assignment/pages/main/dashboard/user/manage/manageUser.module";
 import {ToolbarModule} from "primeng/toolbar";
+import {AddUserComponent} from "./assignment/pages/main/dashboard/user/manage/addUser/addUser.component";
+import {SelectButtonModule} from "primeng/selectbutton";
 import {InputNumberModule} from "primeng/inputnumber";
 import {RadioButtonModule} from "primeng/radiobutton";
 import {InputTextareaModule} from "primeng/inputtextarea";
@@ -53,7 +54,8 @@ const routes: Routes = [
   {path: 'add', component: AddComponent},
   {path: 'delete', component: DeleteComponent},
   {path: 'update', component: UpdateComponent},
-  {path: 'users', component: ManageUserComponent}
+  {path: 'users', component: ManageUserComponent},
+  {path: 'addUser', component: AddUserComponent}
 ]
 
 
@@ -71,6 +73,7 @@ const routes: Routes = [
     UpdateComponent,
     LoaderComponent,
     ManageUserComponent,
+    AddUserComponent
   ],
   imports: [
     FormsModule,
@@ -97,6 +100,8 @@ const routes: Routes = [
     ProgressSpinnerModule,
     ToastModule,
     ManageUserModule,
+    ToolbarModule,
+    SelectButtonModule,
     ToolbarModule,
     InputNumberModule,
     RadioButtonModule,

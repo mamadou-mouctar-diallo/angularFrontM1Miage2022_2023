@@ -19,9 +19,13 @@ private prefix: string = "/users";
 
   delete(): any {
   }
+  generateId(): string{
+    let id = 'uvd'+Date.now();
+    return id;
+  }
 
   add(user: User): Observable<any> {
-    return this.http.post<any>(URL+this.prefix, user);
+    return this.http.post<any>(URL+this.prefix+'/add', user);
   }
 
   getOne(): any {
