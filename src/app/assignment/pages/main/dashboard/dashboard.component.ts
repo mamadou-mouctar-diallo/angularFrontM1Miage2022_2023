@@ -50,19 +50,6 @@ export class DashboardComponent implements OnInit{
 
   selectedAssignment!: Assignment;
 
-  save(assignment: Assignment): void {
-    this.assignmentService.addAssignment(assignment).subscribe(msg => console.log(msg));
-    this.assignmentService.getOneAssignment(assignment.id).subscribe(assignment => console.log(assignment))
-  }
-
-  update() {
-    this.messagesService.add({severity:'success', summary:'Success', detail:'Data Updated'});
-  }
-
-  delete() {
-    this.messagesService.add({severity:'success', summary:'Success', detail:'Data Deleted'});
-  }
-
   sortOptions!: SelectedItem[] ;
 
   sortOrder!: number;
@@ -144,26 +131,5 @@ export class DashboardComponent implements OnInit{
     return this.selectedAssignment.mark !== null;
   }
 
-  add() {
-    console.log( this.assignmentLocal)
-    let index = 0;
-    this.assignmentLocal.forEach(assigment =>{
-      this.assignmentService.addAssignment({
-        id: this.assignmentService.generateId()+index,
-        name: assigment.name,
-        deadLine: assigment.deadLine,
-        rendered: assigment.rendered,
-        author: assigment.author,
-        course: {
-          name: assigment.course.name,
-          coursePhoto: assigment.course.coursePhoto+"/cours/"+this.cours[this.getIntex(this.cours.length)],
-          teacherPhoto: assigment.course.teacherPhoto+"/prof/"+this.profs[this.getIntex(this.profs.length)]
-        },
-        mark: assigment.mark,
-        comment: assigment.comment
-      }).subscribe(msg => console.log(msg))
-      index++;
-    })
-  }
 }
 
