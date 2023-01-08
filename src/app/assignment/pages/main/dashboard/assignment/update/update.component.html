@@ -1,14 +1,10 @@
 <div class="grid">
   <div class="col-12">
     <div class="card px-6 py-6">
-      <p-table #dt [value]="assignments"  responsiveLayout="scroll" [rows]="10"  [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true">
+      <p-table #dt [value]="assignments"  responsiveLayout="scroll" [rows]="5"  [paginator]="true" [rowsPerPageOptions]="[5,10,15]" [showCurrentPageReport]="true">
         <ng-template pTemplate="caption">
           <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
             <h5 class="m-0">Gestion des assignments</h5>
-            <span class="block mt-2 md:mt-0 p-input-icon-left">
-                            <i class="pi pi-search"></i>
-                            <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."  class="w-full sm:w-auto"/>
-                        </span>
           </div>
         </ng-template>
         <ng-template pTemplate="header">
@@ -47,17 +43,17 @@
       </p-table>
     </div>
 
-    <p-dialog [(visible)]="modalDisplayed" [style]="{width: '450px'}" header="Assignment Details" [modal]="true" class="p-fluid">
+    <p-dialog [(visible)]="modalDisplayed" [style]="{width: '50vw'}" header="Assignment Details" [modal]="true" class="p-fluid">
       <ng-template pTemplate="content">
         <img [src]="assignmentToEdit.course.coursePhoto" [alt]="assignmentToEdit.name" width="150" class="mt-0 mx-auto mb-5 block shadow-2" *ngIf="assignmentToEdit.course.coursePhoto">
         <div class="field">
-          <label for="name">Name</label>
+          <label for="name">Nom du devoir</label>
           <input type="text" pInputText id="name" [(ngModel)]="assignmentToEdit.name" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !assignmentToEdit.name}"/>
           <small class="ng-dirty ng-invalid" *ngIf="submitted && !assignmentToEdit.name">Name is required.</small>
         </div>
         <div class="field">
-          <label for="description">Description</label>
-          <textarea id="description" pInputTextarea [(ngModel)]="assignmentToEdit.comment" required rows="3" cols="20"></textarea>
+          <label for="comment">Commentaire</label>
+          <textarea id="comment" pInputTextarea [(ngModel)]="assignmentToEdit.comment" required rows="3" cols="20"></textarea>
         </div>
 
 <!--        <div class="field">-->
@@ -71,28 +67,6 @@
 <!--            </ng-template>-->
 <!--          </p-dropdown>-->
 <!--        </div>-->
-
-        <div class="field">
-          <label class="mb-3">Category</label>
-          <div class="formgrid grid">
-            <div class="field-radiobutton col-6">
-              <p-radioButton id="category1" name="category" value="Accessories" [(ngModel)]="assignmentToEdit.rendered"></p-radioButton>
-              <label for="category1">Accessories</label>
-            </div>
-            <div class="field-radiobutton col-6">
-              <p-radioButton id="category2" name="category" value="Clothing" [(ngModel)]="assignmentToEdit.mark"></p-radioButton>
-              <label for="category2">Clothing</label>
-            </div>
-            <div class="field-radiobutton col-6">
-              <p-radioButton id="category3" name="category" value="Electronics" [(ngModel)]="assignmentToEdit.author"></p-radioButton>
-              <label for="category3">Electronics</label>
-            </div>
-            <div class="field-radiobutton col-6">
-              <p-radioButton id="category4" name="category" value="Fitness" [(ngModel)]="assignmentToEdit.name"></p-radioButton>
-              <label for="category4">Fitness</label>
-            </div>
-          </div>
-        </div>
 
         <div class="formgrid grid">
           <div class="field col">
@@ -124,13 +98,13 @@
   </div>
 </div>
 
-<p-dialog [(visible)]="displayModalAuthorization" header="Autorisation" [modal]="true" [style]="{width:'450px'}">
+<p-dialog [(visible)]="this.authService.displayModalAuthorization" header="Autorisation" [modal]="true" [style]="{width:'450px'}">
   <div class="flex align-items-center justify-content-center">
     <i class="pi pi-exclamation-triangle mr-3 red" style="font-size: 2rem"></i>
     <span *ngIf="message" class="red">{{message}}</span>
   </div>
   <ng-template pTemplate="footer">
-    <button pButton pRipple icon="pi pi-check" class="p-button-text" label="D'accord" (click)="closeModalAuthorization()"></button>
+    <button pButton pRipple icon="pi pi-check" class="p-button-text" label="D'accord" (click)="this.authService.closeModalAuthorization()"></button>
   </ng-template>
 </p-dialog>
 

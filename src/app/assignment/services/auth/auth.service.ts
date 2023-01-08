@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {User} from "../../models/user";
 import {Router} from "@angular/router";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {URL} from "../../utils/utils";
 import jwt_decode from 'jwt-decode';
@@ -11,6 +11,9 @@ import {ProtectService} from "../protect.service";
   providedIn: 'root',
 })
 export class AuthService {
+
+  displayModalAuthorization: boolean = false;
+
   constructor(private router: Router, private http: HttpClient, private protectService: ProtectService) {
   }
 
@@ -29,7 +32,7 @@ export class AuthService {
     return user.role?.trim() == "admin";
   }
   isUserAuthorized(): boolean{
-    let token = localStorage.getItem('token') || "vide";
+    let token = this.getToken();
     const decodeToken: any = this.decodeTheToken(token);
     console.log(decodeToken)
     if(decodeToken !== null){
@@ -44,11 +47,18 @@ export class AuthService {
     return localStorage.getItem('token') || 'vide';
   }
 
-  decodeTheToken(token: string){
+ private decodeTheToken(token: string){
     try {
       return jwt_decode(token);
     }catch (err) {
       return null
     }
+  }
+
+  closeModalAuthorization(): void{
+    this.displayModalAuthorization = false;
+  }
+  showAuthorization(): void{
+    this.displayModalAuthorization = true;
   }
 }

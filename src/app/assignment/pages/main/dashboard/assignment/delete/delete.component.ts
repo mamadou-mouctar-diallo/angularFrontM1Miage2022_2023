@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {Table} from "primeng/table";
 import {AssignmentService} from "../../../../../services/assignment/assignment.service";
 import {Assignment} from "../../../../../models/assignment";
+import {AuthService} from "../../../../../services/auth/auth.service";
 
 @Component({
   selector: "app-delete",
@@ -12,10 +13,12 @@ export class DeleteComponent implements OnInit{
   assignments!: Assignment[];
   assignmentToDelete!: any;
   modalDisplayed: boolean = false;
-  constructor(private assignmentService: AssignmentService) {
+  displayModalDeletion: boolean = false;
+  message!: string;
+  constructor(private assignmentService: AssignmentService, public authService: AuthService) {
   }
 
-  deleteAssignment(assignment: any) {
+  deleteAssignment(assignment: Assignment) {
     console.log(assignment)
     this.assignmentToDelete = assignment
     this.modalDisplayed = true;
@@ -30,12 +33,24 @@ export class DeleteComponent implements OnInit{
   }
 
   confirmDelete() {
-    this.assignmentService.deleteAssignment(this.assignmentToDelete._id).subscribe(msg => console.log(msg))
+    this.assignmentService.deleteAssignment(this.assignmentToDelete._id).subscribe(data => {
+      if(!this.authService.isUserLogged()){
+        this.authService.showAuthorization();
+        this.message = data.auth;
+      }else {
+        this.displayModalDeletion = true;
+        this.message = data.msg;
+      }
+
+    })
     this.modalDisplayed = false;
 
   }
   cancelDelete(){
     this.modalDisplayed = false;
 
+  }
+  closeModeDeletion(): void {
+    this.displayModalDeletion = false;
   }
 }

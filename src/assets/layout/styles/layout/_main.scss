@@ -73,6 +73,7 @@ a {
    align-items: center;
    width: 25vw;
    padding: 10px;
+  margin-left: 40px;
  }
 
 .btn-home{
@@ -127,4 +128,17 @@ a {
   div button i{
     margin-right: 10px;
   }
+}
+
+.dash-image{
+  height: 20vh;
+  width: 50px;
+}
+.bg-blue{
+  background: #1f86f9;
+  font-weight: bold;
+  font-size: 2rem;
+  color: white;
+  padding: 5rem;
+  border-radius: 12px;
 }

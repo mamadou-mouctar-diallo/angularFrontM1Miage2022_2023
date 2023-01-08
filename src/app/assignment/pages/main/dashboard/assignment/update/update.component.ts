@@ -15,10 +15,9 @@ export class UpdateComponent implements OnInit{
   assignmentToEdit!: any;
   submitted: boolean = false;
   modalDisplayed: boolean = false;
-  displayModalAuthorization: boolean = false;
   displayModalModification: boolean = false;
   message!: string;
-  constructor(public assignmentService: AssignmentService, private authService: AuthService) {
+  constructor(public assignmentService: AssignmentService, public authService: AuthService) {
   }
 
   onGlobalFilter(dt: Table, assignmentName: Event) {
@@ -39,7 +38,7 @@ export class UpdateComponent implements OnInit{
     this.assignmentService.upDateAssignment(this.assignmentToEdit).subscribe(data => {
       console.log(data)
       if(!this.authService.isUserLogged()){
-        this.displayModalAuthorization = true;
+        this.authService.showAuthorization();
         this.message = data.auth;
       }else {
         this.displayModalModification = true;
@@ -51,9 +50,6 @@ export class UpdateComponent implements OnInit{
   }
   cancelEdit(){
     this.modalDisplayed = false;
-  }
-  closeModalAuthorization(): void{
-    this.displayModalAuthorization = false;
   }
   closeModalModification(): void{
     this.displayModalModification = false;

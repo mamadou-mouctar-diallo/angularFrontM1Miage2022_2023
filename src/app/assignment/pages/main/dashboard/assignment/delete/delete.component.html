@@ -5,10 +5,6 @@
         <ng-template pTemplate="caption">
           <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
             <h5 class="m-0">Gestion des assignments</h5>
-            <span class="block mt-2 md:mt-0 p-input-icon-left">
-                            <i class="pi pi-search"></i>
-                            <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."  class="w-full sm:w-auto"/>
-                        </span>
           </div>
         </ng-template>
         <ng-template pTemplate="header">
@@ -46,19 +42,39 @@
         </ng-template>
       </p-table>
     </div>
-    <p-dialog [(visible)]="modalDisplayed" header="Confirm" [modal]="true" [style]="{width:'450px'}">
+    <p-dialog [(visible)]="modalDisplayed" header="Surppression" [modal]="true" [style]="{width:'450px'}">
       <div class="flex align-items-center justify-content-center">
         <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
         <span *ngIf="assignmentToDelete">Etes vous sur de voulloir supprimer ce devoir <b>{{assignmentToDelete.name}}</b>?</span>
       </div>
       <ng-template pTemplate="footer">
         <button pButton pRipple icon="pi pi-times" class="p-button-text" label="Non" (click)="cancelDelete()"></button>
-        <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Oui" (click)="confirmDelete()"></button>
+        <button pButton pRipple icon="pi pi-check" class="p-button-text red " label="Oui" (click)="confirmDelete()"></button>
       </ng-template>
     </p-dialog>
 
   </div>
 </div>
+
+<p-dialog [(visible)]="this.authService.displayModalAuthorization" header="Autorisation" [modal]="true" [style]="{width:'450px'}">
+  <div class="flex align-items-center justify-content-center">
+    <i class="pi pi-exclamation-triangle mr-3 red" style="font-size: 2rem"></i>
+    <span *ngIf="message" class="red">{{message}}</span>
+  </div>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple icon="pi pi-check" class="p-button-text" label="D'accord" (click)="this.authService.closeModalAuthorization()"></button>
+  </ng-template>
+</p-dialog>
+
+<p-dialog [(visible)]="displayModalDeletion" header="Surppression" [modal]="true" [style]="{width:'450px'}">
+  <div class="flex align-items-center justify-content-center">
+    <i class="pi pi-check mr-3 green" style="font-size: 2rem"></i>
+    <span *ngIf="message" class="green">{{message}}</span>
+  </div>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple icon="pi pi-check" class="p-button-text" label="D'accord" (click)="closeModeDeletion()"></button>
+  </ng-template>
+</p-dialog>
 
 
 

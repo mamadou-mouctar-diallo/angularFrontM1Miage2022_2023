@@ -76,7 +76,7 @@
               </div>
               <div class="flex flex-column align-items-center text-center mb-3">
                 <div class="text-2xl font-bold">{{assignment.name}}</div>
-                <img [src]="assignment.course.coursePhoto" [alt]="assignment.name" class="w-9 shadow-2 my-3 mx-0"/>
+                <img [src]="assignment.course.coursePhoto" [alt]="assignment.name" class="w-9 shadow-2 my-3 mx-0 dash-image"/>
               </div>
               <div class="flex align-items-center justify-content-end">
                 <p-button *ngIf="this.authService.isUserLogged()"  icon="pi pi-external-link" label="Details" (click)="showModalDialog(assignment)"></p-button>
@@ -125,8 +125,12 @@
     <h5>Infos sur l'enseignement du devoir</h5>
     <div class=" card  mt-2">
       <div class="flex justify-content-between">
-        <h6>Nom du cours</h6>
+        <h6>Nom du cours:</h6>
         <p>{{selectedAssignment.course.name}}</p>
+      </div>
+      <div class="flex justify-content-between">
+        <h6>Enseignant:</h6>
+        <img [src]="selectedAssignment.course.teacherPhoto" width="150" class="mt-0 mx-auto mb-5 block shadow-2" [alt]="selectedAssignment.course.name">
       </div>
     </div>
     <p-divider></p-divider>

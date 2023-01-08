@@ -95,9 +95,12 @@ export class DashboardComponent implements OnInit{
     return 'pi-clock orange'
   }
 
-  showModalDialog(assigment: Assignment) {
+  showModalDialog(assigment: Assignment): void {
     this.selectedAssignment = assigment;
-    this.displayModal = !this.displayModal;
+    this.displayModal = true;
+  }
+  closeModalDialog(): void{
+    this.displayModal = false;
   }
 
   sortByName() {
