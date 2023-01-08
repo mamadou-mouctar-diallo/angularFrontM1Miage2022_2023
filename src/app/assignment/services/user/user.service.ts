@@ -9,15 +9,15 @@ import {Observable} from "rxjs";
   providedIn: "root"
 })
 
-export class UserService implements Crud, OnInit{
+export class UserService implements OnInit{
 private prefix: string = "/users";
   constructor(private http: HttpClient) {
   }
   getAll(): Observable<User[]> {
    return  this.http.get<User[]>(URL+this.prefix);
   }
-
-  delete(): any {
+  deleteUser(id: any): Observable<any>{
+    return this.http.delete<any>(URL+this.prefix+'/delete/'+id);
   }
   generateId(): string{
     let id = 'uvd'+Date.now();

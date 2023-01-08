@@ -41,7 +41,6 @@ import {NetworkInterceptor} from "./network.interceptor";
 import {ToastModule} from "primeng/toast";
 import {ManageUserModule} from "./assignment/pages/main/dashboard/user/manage/manageUser.module";
 import {ToolbarModule} from "primeng/toolbar";
-import {AddUserComponent} from "./assignment/pages/main/dashboard/user/manage/addUser/addUser.component";
 import {SelectButtonModule} from "primeng/selectbutton";
 import {InputNumberModule} from "primeng/inputnumber";
 import {RadioButtonModule} from "primeng/radiobutton";
@@ -55,7 +54,6 @@ const routes: Routes = [
   {path: 'delete', component: DeleteComponent},
   {path: 'update', component: UpdateComponent},
   {path: 'users', component: ManageUserComponent},
-  {path: 'addUser', component: AddUserComponent}
 ]
 
 
@@ -73,7 +71,6 @@ const routes: Routes = [
     UpdateComponent,
     LoaderComponent,
     ManageUserComponent,
-    AddUserComponent
   ],
   imports: [
     FormsModule,
