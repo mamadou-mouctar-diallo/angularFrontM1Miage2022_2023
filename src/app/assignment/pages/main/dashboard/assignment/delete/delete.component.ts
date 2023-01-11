@@ -34,6 +34,7 @@ export class DeleteComponent implements OnInit{
 
   confirmDelete() {
     this.assignmentService.deleteAssignment(this.assignmentToDelete._id).subscribe(data => {
+      console.log(data)
       if(!this.authService.isUserLogged()){
         this.authService.showAuthorization();
         this.message = data.auth;

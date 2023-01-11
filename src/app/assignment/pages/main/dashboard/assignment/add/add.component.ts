@@ -33,6 +33,8 @@ export class AddComponent {
   email: any;
   password: any;
   forms: formAssignment[] = [this.formAssignmentA, this.formAssignmentB, this.formAssignmentC]
+  authors: any;
+  selectedAutor: any;
   nextForm(): void{
     if(this.formSize <= 3){
       if(this.formSize === 0){
