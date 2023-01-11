@@ -31,7 +31,8 @@ private prefix: string = "/users";
   getOne(): any {
   }
 
-  update(): any {
+  updateUser(user:any): Observable<any> {
+    return this.http.put<any>(URL+this.prefix+'/update/'+user._id, user);
   }
 
   ngOnInit(): void {

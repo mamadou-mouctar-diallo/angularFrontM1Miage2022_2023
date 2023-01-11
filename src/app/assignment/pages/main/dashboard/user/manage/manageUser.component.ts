@@ -2,8 +2,6 @@ import {Component,OnInit} from "@angular/core";
 import {UserService} from "../../../../../services/user/user.service"
 import {Table} from "primeng/table";
 import {User} from "../../../../../models/user";
-import {AssignmentService} from "../../../../../services/assignment/assignment.service";
-import {Assignment} from "../../../../../models/assignment";
 import {Router} from "@angular/router";
 @Component({
   selector: "app-manage",
@@ -13,8 +11,10 @@ import {Router} from "@angular/router";
 export class ManageUserComponent implements OnInit{
   users!: User[];
   stateOptions: any[];
-  userToEdit!: User;
+  userToEdit!: any;
   userToDelete!: any;
+  delUser!:any;
+  userName!:string;
   displayAddUserModal: boolean = false;
   displayDeleteUserModal: boolean = false;
   displayEditUserModal:boolean = false;
@@ -23,7 +23,8 @@ export class ManageUserComponent implements OnInit{
   password?: string;
   role?: string;
   action?:string;
-  constructor(public userService: UserService, private route: Router) {
+  editedPassword?:string;
+  constructor(public userService: UserService) {
     this.stateOptions = [{label: 'Classic', value: 'Classic'}, {label: 'Admin', value: 'Admin'}];
   }
 
@@ -43,6 +44,18 @@ export class ManageUserComponent implements OnInit{
     this.displayAddUserModal = true;
   }
 
+  showEditUserModalDialog(user:User){
+    this.action='editing';
+    this.userToEdit = {
+      id:user.id,
+      name:user.name,
+      email:user.email,
+      password:user.password,
+      role:user.role
+    };
+    this.delUser=user;
+    this.displayEditUserModal = true;
+  }
   addNewUser(){
     if(this.isDisableAddUserForm()==false){
       let user:User ={
@@ -52,9 +65,11 @@ export class ManageUserComponent implements OnInit{
         password:this.password,
         role:this.role
       };
-      this.userService.add(user).subscribe(user=>console.log(user));
+      this.userService.add(user).subscribe(user=>{
+        console.log(user)
+        this.ngOnInit();
+      });
       this.displayAddUserModal = false;
-      this.ngOnInit();
     }
   }
   deleteUser(user:User){
@@ -64,21 +79,15 @@ export class ManageUserComponent implements OnInit{
     //this.userService.delete(user)
   }
   confirmDeleteUser() {
-    this.userService.deleteUser(this.userToDelete._id).subscribe(msg => console.log(msg))
+    this.userService.deleteUser(this.userToDelete._id).subscribe(msg =>{
+      this.ngOnInit();
+      console.log(msg)
+    } )
     this.displayDeleteUserModal = false;
   }
   closeDeleteModal(){
     this.displayDeleteUserModal = false;
   }
-  updateUser(user:User){
-    console.log(user);
-    this.userToEdit = user;
-    this.displayEditUserModal=true;
-}
-  // name?: string;
-  // email?: string;
-  // password?: string;
-  // role?: string;
   isDisableAddUserForm():boolean{
     if(this.name == null || this.email==null
       || this.password==null || this.role==null
@@ -86,7 +95,7 @@ export class ManageUserComponent implements OnInit{
       || this.email.replaceAll(' ','')==''
       || this.password.replaceAll(' ','')==''
       || this.password?.search(' ')!=-1
-    ){
+      ){
       return true;
     }
     return false;
@@ -95,8 +104,40 @@ export class ManageUserComponent implements OnInit{
   totalUsers():number{
     return this.users.length;
   }
-  editUser(){
+  cancelModal(modal:string){
+    if(modal=="editModal"){
+      this.displayEditUserModal=false;
+    }
+    if(modal=="addModal"){
+      this.displayAddUserModal=false;
+    }
+  }
+  saveEditUser(){
+    if(!this.isDisableEditUserForm()){
+      if(this.editedPassword?.search(' ')!=-1){
+        this.editedPassword =undefined;
+      }
+      if(this.editedPassword !== null && this.editedPassword!== undefined){
+        this.userToEdit.password=this.editedPassword;
+      }
+      this.userToEdit._id=this.delUser._id;
+      this.userService.updateUser(this.userToEdit).subscribe(user=>{
+        console.log(user);
+        this.ngOnInit();
+      })
+      this.displayEditUserModal=false;
+    }
 
+  }
+  isDisableEditUserForm():boolean{
+    if(this.userToEdit.name == null || this.userToEdit.email==null
+      || this.userToEdit.role==null
+      || this.userToEdit.name.replaceAll(' ','')==''
+      || this.userToEdit.email.replaceAll(' ','')==''
+    ){
+      return true;
+    }
+    return false;
   }
   allUsers(){
 

@@ -1,16 +1,16 @@
 <div class="grid w-300">
   <div class="col-12">
     <div class="card px-6 py-6">
-      <p-table #dt [value]="users"  responsiveLayout="scroll" [rows]="10"  [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true">
+      <p-table #dt [value]="users"  responsiveLayout="scroll" [rows]="5"  [paginator]="true" [rowsPerPageOptions]="[5,10,15]" [showCurrentPageReport]="true">
         <ng-template pTemplate="caption">
           <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
-            <h5 class="m-0">Users panel</h5>
+            <h5 class="m-0">Gestion des Utilisateurs</h5>
             <div>
               <span class="block text-500 font-medium mb-3">Total Users : {{totalUsers()}}</span>
             </div>
             <span class="block mt-2 md:mt-0 p-input-icon-left">
                             <i class="pi pi-search"></i>
-                            <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."  class="w-full sm:w-auto"/>
+                            <input pInputText type="text"  (input)="dt.filterGlobal(users,userName)" [(ngModel)]="userName" placeholder="Search User"  class="w-full sm:w-auto"/>
                         </span>
           </div>
         </ng-template>
@@ -21,7 +21,7 @@
             <th >role</th>
             <th></th>
             <th>Action</th>
-            <th><button pButton class="p-button-plain p-button-success" (click)="showAddUserModalDialog()" > <i class="pi pi-plus"> </i> Add New User</button></th>
+            <th><button pButton class="p-button-plain p-button-success" (click)="showAddUserModalDialog()" > <i class="pi pi-plus"> </i> Ajouter un Utilisateur</button></th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-user>
@@ -43,7 +43,7 @@
             </td>
             <td>
               <div class="flex">
-                <button pButton pRipple pTooltip = "Modifier cet Utilisateur" icon="pi pi-pencil" class="p-button-rounded p-button-secondary mr-2" (click)="updateUser(user)" ></button>
+                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" pTooltip = "Modifier cet Utilisateur" icon="pi pi-pencil" (click)="showEditUserModalDialog(user)" ></button>
                 <button  pButton pRipple pTooltip = "Supprimer cet Utilisateur" icon="pi pi-trash" class="p-button-rounded p-button-raised p-button-danger" (click)="deleteUser(user)"></button>
               </div>
             </td>
@@ -54,14 +54,15 @@
   </div>
 </div>
 
-<p-dialog header="Add a New User" [(visible)]="displayAddUserModal" [modal]="true" [style]="{width: '50vw'}" class="p-fluid"
+<!--Boite de dialogue pour l'ajout d'un utilisateur-->
+<p-dialog header="Ajout d'un nouvel utilisateur" [(visible)]="displayAddUserModal" [modal]="true" [style]="{width: '50vw'}" class="p-fluid"
           [draggable]="false" [resizable]="false">
   <ng-template pTemplate="body">
     <p-divider></p-divider>
-    <h5 class="m-0">User details</h5>
+    <h5 class="m-0">Informations de l'utilisateur</h5>
     <div class=" card  mt-2">
       <div class="field">
-        <label for="name">User name:</label>
+        <label for="name">Nom de l'utilisateur:</label>
         <input type="text" pInputText [(ngModel)]="name" id="name" name="name"/>
         <small class="p-error block" *ngIf="name==null || name.replaceAll(' ','')==''">Name is required.</small>
       </div>
@@ -71,28 +72,64 @@
         <small class="p-error block" *ngIf="email==null || email.replaceAll(' ','')==''">Email is required.</small>
       </div>
       <div class="field">
-        <label for="password">Password:</label>
+        <label for="password">Mot de passe:</label>
         <p-password [(ngModel)]="password" id="password" name="password" [toggleMask] ="true"></p-password>
         <small class="p-error block" *ngIf="password==null || password.replaceAll(' ','')==''">Password is required.</small>
-        <small class="p-error block" *ngIf="password?.search(' ')!=-1">Password must not contains stace</small>
+        <small class="p-error block" *ngIf="password?.search(' ')!=-1">Password must not contains space</small>
       </div>
       <div class="field">
-        <label for="role">Choose User Role: </label>
+        <label for="role">Role d'Utilisateur: </label>
         <p-selectButton id="role"  [options]="stateOptions" [(ngModel)]="role" optionLabel="label" optionValue="value" name="role"></p-selectButton>
         <small class="p-error block" *ngIf="role==null">Role is required.</small>
       </div>
     </div>
   </ng-template>
   <ng-template pTemplate="footer">
+    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="cancelModal('addModal')"></button>
     <p-button [disabled]="isDisableAddUserForm()" icon="pi pi-check" label="Add User" styleClass="p-button-text" (click)="addNewUser()"></p-button>
   </ng-template>
 </p-dialog>
 
+<!--Boite de dialogue pour la modification d'un utilisateur-->
+<p-dialog header="Modification de l'Utilisateur" [(visible)]="displayEditUserModal" [modal]="true" [style]="{width: '50vw'}" class="p-fluid"
+          [draggable]="false" [resizable]="false">
+  <ng-template pTemplate="body">
+    <p-divider></p-divider>
+    <h5 class="m-0">Informations de l'utilisateur</h5>
+    <div class=" card  mt-2">
+      <div class="field">
+        <label for="name">Nom de l'utilisateur:</label>
+        <input type="text" pInputText [(ngModel)]="userToEdit.name" id="editName" name="name"/>
+        <small class="p-error block" *ngIf="userToEdit.name==null || userToEdit.name.replaceAll(' ','')==''">Name is required.</small>
+      </div>
+      <div class="field">
+        <label for="email">Email:</label>
+        <input type="text" pInputText [(ngModel)]="userToEdit.email" id="editEmail" name="email"/>
+        <small class="p-error block" *ngIf="userToEdit.email==null || userToEdit.email.replaceAll(' ','')==''">Email is required.</small>
+      </div>
+      <div class="field">
+        <label for="password">Nouveau mot de passe:</label>
+        <p-password [(ngModel)]="editedPassword"  id="editedPassword" name="editedPassword" [toggleMask] ="true"></p-password>
+      </div>
+      <div class="field">
+        <label for="role">Role d'Utilisateur: </label>
+        <p-selectButton id="editRole"  [options]="stateOptions" [(ngModel)]="userToEdit.role" optionLabel="label" optionValue="value" name="role"></p-selectButton>
+        <small class="p-error block" *ngIf="userToEdit.role==null">Role is required.</small>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="cancelModal('editModal')"></button>
+    <p-button [disabled]="isDisableEditUserForm()" icon="pi pi-check" label="edit User" styleClass="p-button-text" (click)="saveEditUser()"></p-button>
+  </ng-template>
+</p-dialog>
 
-<p-dialog [(visible)]="displayDeleteUserModal" header="Confirm" [modal]="true" [style]="{width:'450px'}">
+
+<!--Boite de dialogue pour la suppression d'un utilisateur-->
+<p-dialog [(visible)]="displayDeleteUserModal" header="Confirmation" [modal]="true" [style]="{width:'450px'}">
   <div class="flex align-items-center justify-content-center">
     <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
-    <span *ngIf="userToDelete">Do you confirm the deletion of the user <b> {{userToDelete.name}} </b>?</span>
+    <span *ngIf="userToDelete">confirmez-vous la suppression de l'utilisateur: <b> {{userToDelete.name}} </b>?</span>
   </div>
   <ng-template pTemplate="footer">
     <button pButton pRipple icon="pi pi-times" class="p-button-text" label="Non" (click)="closeDeleteModal()"></button>
