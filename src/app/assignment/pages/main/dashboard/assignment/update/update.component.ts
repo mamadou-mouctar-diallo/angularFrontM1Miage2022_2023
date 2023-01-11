@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {AssignmentService} from "../../../../../services/assignment/assignment.service";
 import {Table} from "primeng/table";
 import {Assignment} from "../../../../../models/assignment";
@@ -10,28 +10,20 @@ import {AuthService} from "../../../../../services/auth/auth.service";
 })
 
 export class UpdateComponent implements OnInit{
-  assignments!: Assignment[];
-  assignmentName: any;
+  @Input()
   assignmentToEdit!: any;
   submitted: boolean = false;
   modalDisplayed: boolean = false;
   displayModalModification: boolean = false;
   message!: string;
+  @Output()
+  finishToEdit: EventEmitter<boolean> = new EventEmitter<boolean>();
   constructor(public assignmentService: AssignmentService, public authService: AuthService) {
   }
 
-  onGlobalFilter(dt: Table, assignmentName: Event) {
-    // dt.(assignmentName, 'contains');
-  }
-
-  editAssignment(assignment: Assignment) {
-    console.log(assignment)
-    this.assignmentToEdit = assignment;
-    this.modalDisplayed = true;
-  }
-
   ngOnInit(): void {
-    this.assignmentService.getAssignments().subscribe(assignments => this.assignments = assignments);
+    this.assignmentToEdit = this.assignmentService.configAssignmentToEdit.assignment;
+    this.modalDisplayed = this.assignmentService.configAssignmentToEdit.modalOpened;
   }
 
   saveEdit() {
@@ -50,9 +42,12 @@ export class UpdateComponent implements OnInit{
   }
   cancelEdit(){
     this.modalDisplayed = false;
+    this.assignmentService.initConfigAssignmentToEdit();
   }
   closeModalModification(): void{
     this.displayModalModification = false;
+    this.finishToEdit.emit(true);
+    this.assignmentService.initConfigAssignmentToEdit();
   }
 
 }

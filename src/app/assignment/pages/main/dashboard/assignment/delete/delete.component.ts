@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {Table} from "primeng/table";
 import {AssignmentService} from "../../../../../services/assignment/assignment.service";
 import {Assignment} from "../../../../../models/assignment";
@@ -10,26 +10,19 @@ import {AuthService} from "../../../../../services/auth/auth.service";
 })
 
 export class DeleteComponent implements OnInit{
-  assignments!: Assignment[];
+  @Input()
   assignmentToDelete!: any;
   modalDisplayed: boolean = false;
   displayModalDeletion: boolean = false;
   message!: string;
+  @Output()
+  finishToDelete: EventEmitter<boolean> = new EventEmitter<boolean>();
   constructor(private assignmentService: AssignmentService, public authService: AuthService) {
   }
 
-  deleteAssignment(assignment: Assignment) {
-    console.log(assignment)
-    this.assignmentToDelete = assignment
-    this.modalDisplayed = true;
-  }
-
-  onGlobalFilter(dt: Table, $event: Event) {
-    dt.filterGlobal($event.target, 'contains')
-  }
-
   ngOnInit(): void {
-    this.assignmentService.getAssignments().subscribe(assignments => this.assignments = assignments);
+    this.assignmentToDelete = this.assignmentService.configAssignmentToDelete.assignment;
+    this.modalDisplayed = this.assignmentService.configAssignmentToDelete.modalOpened;
   }
 
   confirmDelete() {
@@ -49,9 +42,12 @@ export class DeleteComponent implements OnInit{
   }
   cancelDelete(){
     this.modalDisplayed = false;
+    this.assignmentService.initConfigAssignmentToDelete();
 
   }
   closeModeDeletion(): void {
     this.displayModalDeletion = false;
+    this.finishToDelete.emit(true);
+    this.assignmentService.initConfigAssignmentToDelete();
   }
 }

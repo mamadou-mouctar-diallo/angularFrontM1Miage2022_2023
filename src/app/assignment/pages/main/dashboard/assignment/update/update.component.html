@@ -1,47 +1,6 @@
 <div class="grid">
   <div class="col-12">
     <div class="card px-6 py-6">
-      <p-table #dt [value]="assignments"  responsiveLayout="scroll" [rows]="5"  [paginator]="true" [rowsPerPageOptions]="[5,10,15]" [showCurrentPageReport]="true">
-        <ng-template pTemplate="caption">
-          <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
-            <h5 class="m-0">Gestion des assignments</h5>
-          </div>
-        </ng-template>
-        <ng-template pTemplate="header">
-          <tr>
-            <th >Nom</th>
-            <th >Auteur</th>
-            <th >Matière</th>
-            <th></th>
-            <th>Action</th>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-assignment>
-          <tr>
-            <td style="width:14%; min-width:10rem;">
-              <span class="p-column-title">Name</span>
-              {{assignment.name}}
-            </td>
-            <td style="width:14%; min-width:8rem;">
-              <span class="p-column-title">Auteur</span>
-              {{assignment.author}}
-            </td>
-            <td style="width:14%; min-width:10rem;">
-              <span class="p-column-title">Matière</span>
-              {{assignment.course.name}}
-            </td>
-            <td style="width:14%; min-width:10rem;"><span class="p-column-title">Image</span>
-              <img [src]="assignment.course.coursePhoto" [alt]="assignment.name" width="100" class="shadow-4" />
-            </td>
-            <td>
-              <div class="flex">
-                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editAssignment(assignment)"></button>
-              </div>
-            </td>
-          </tr>
-        </ng-template>
-      </p-table>
-    </div>
     <p-dialog [(visible)]="modalDisplayed" [style]="{width: '450px'}" header="Modification Devoir" [modal]="true" class="p-fluid">
       <ng-template pTemplate="content">
         <img [src]="assignmentToEdit.course.coursePhoto" [alt]="assignmentToEdit.name" width="150" class="mt-0 mx-auto mb-5 block shadow-2" *ngIf="assignmentToEdit.course.coursePhoto">
@@ -116,3 +75,5 @@
     <button pButton pRipple icon="pi pi-check" class="p-button-text" label="D'accord" (click)="closeModalModification()"></button>
   </ng-template>
 </p-dialog>
+
+</div>

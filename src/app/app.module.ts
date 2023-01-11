@@ -50,9 +50,7 @@ import {CalendarModule} from "primeng/calendar";
 const routes: Routes = [
   {path: '', component: DashboardComponent},
   {path: 'connect', component: LoginComponent},
-  {path: 'add', component: AddComponent},
-  {path: 'delete', component: DeleteComponent},
-  {path: 'update', component: UpdateComponent},
+  {path: 'assignments', component: ManageComponent},
   {path: 'users', component: ManageUserComponent},
 ]
 

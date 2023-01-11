@@ -30,9 +30,7 @@ export class SidbebarComponent implements OnInit{
       {
         label: 'devoirs',
         items: [
-          {label: 'Ajouter', icon: 'pi pi-plus', routerLink: ['/add']},
-          {label: 'Supprimer', icon: 'pi pi-trash', routerLink: ['/delete']},
-          {label: 'Modifier', icon: 'pi pi-pencil', routerLink: ['/update']}
+          {label: 'Manage assignments', icon: 'pi pi-folder-open', routerLink: ['/assignments']},
         ]
       },
       {

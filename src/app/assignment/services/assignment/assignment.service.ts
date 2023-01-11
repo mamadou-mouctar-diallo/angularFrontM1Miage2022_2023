@@ -1,12 +1,19 @@
 import {Injectable, OnInit} from "@angular/core";
 import {Assignment} from "../../models/assignment";
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {Crud} from "../../interfaces/crud";
+import {Observable, of} from "rxjs";
 import {URL} from "../../utils/utils";
+
+export interface configAssignment {
+  modalOpened: boolean,
+  assignment: any
+
+};
 
 @Injectable()
 export class AssignmentService implements OnInit{
+  configAssignmentToDelete!: configAssignment;
+  configAssignmentToEdit!: configAssignment;
   assignments!: any [];
   assignmentsPrepared!: Assignment [];
   assignmentTemp!: Assignment;
@@ -45,6 +52,30 @@ export class AssignmentService implements OnInit{
 
   deleteAssignment(id: any): Observable<any>{
     return this.http.delete<any>(URL+this.prefix+'/delete/'+id);
+  }
+
+  setConfigAssignmentToDelete( configAssignment:configAssignment): Observable<boolean>{
+    console.log(configAssignment)
+    this.configAssignmentToDelete = configAssignment;
+    return of(true);
+  }
+
+  setConfigAssignmentToEdit( configAssignment:configAssignment): Observable<boolean>{
+    console.log(configAssignment)
+    this.configAssignmentToEdit = configAssignment;
+    return of(true);
+  }
+  initConfigAssignmentToDelete(): void{
+    this.configAssignmentToDelete = {
+      modalOpened: false,
+      assignment: {}
+    };
+  }
+  initConfigAssignmentToEdit(): void{
+    this.configAssignmentToEdit = {
+      modalOpened: false,
+      assignment: {}
+    };
   }
 
 }
