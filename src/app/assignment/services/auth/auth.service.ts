@@ -24,8 +24,10 @@ export class AuthService {
    return  this.http.post<any>(URL+"/users/login", obj);
   }
   public sessionDistory(){
-   localStorage.clear();
-   this.router.navigate(['connect']).then(r => console.log(r))
+   if (this.isTokenExpired()){
+     localStorage.clear();
+     console.log(this.isTokenExpired())
+   }
   }
 
   isUserAdmin(user: User): boolean {
@@ -34,20 +36,23 @@ export class AuthService {
   isUserAuthorized(): boolean{
     let token = this.getToken();
     const decodeToken: any = this.decodeTheToken(token);
-    console.log(decodeToken)
+    console.log(decodeToken.exp)
     if(decodeToken !== null){
-      if(decodeToken.role === "admin"){
-          return true
-      }
+      return decodeToken.role === "admin";
     }
     return false;
+  }
+
+  private isTokenExpired(): boolean{
+    const token: any = this.decodeTheToken(this.getToken());
+    if(token === null) return false;
+    return Math.floor((new Date).getTime() / 10) >= token.exp;
   }
 
   getToken(): string{
     return localStorage.getItem('token') || 'vide';
   }
-
- private decodeTheToken(token: string){
+  decodeTheToken(token: string){
     try {
       return jwt_decode(token);
     }catch (err) {

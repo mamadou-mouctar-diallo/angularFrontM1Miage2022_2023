@@ -10,7 +10,6 @@ import {AuthService} from "../../../../../services/auth/auth.service";
 })
 
 export class DeleteComponent implements OnInit{
-  @Input()
   assignmentToDelete!: any;
   modalDisplayed: boolean = false;
   displayModalDeletion: boolean = false;
@@ -23,6 +22,7 @@ export class DeleteComponent implements OnInit{
   ngOnInit(): void {
     this.assignmentToDelete = this.assignmentService.configAssignmentToDelete.assignment;
     this.modalDisplayed = this.assignmentService.configAssignmentToDelete.modalOpened;
+    this.authService.sessionDistory();
   }
 
   confirmDelete() {

@@ -79,7 +79,7 @@
                 <img [src]="assignment.course.coursePhoto" [alt]="assignment.name" class="w-9 shadow-2 my-3 mx-0 dash-image"/>
               </div>
               <div class="flex align-items-center justify-content-end">
-                <p-button *ngIf="this.authService.isUserLogged()"  icon="pi pi-external-link" label="Details" (click)="showModalDialog(assignment)"></p-button>
+                <p-button *ngIf="isUserLogged"  icon="pi pi-external-link" label="Details" (click)="showModalDialog(assignment)"></p-button>
               </div>
             </div>
           </div>

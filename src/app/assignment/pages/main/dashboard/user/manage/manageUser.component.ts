@@ -3,6 +3,7 @@ import {UserService} from "../../../../../services/user/user.service"
 import {Table} from "primeng/table";
 import {User} from "../../../../../models/user";
 import {Router} from "@angular/router";
+import {AuthService} from "../../../../../services/auth/auth.service";
 @Component({
   selector: "app-manage",
   templateUrl: "manageUser.component.html"
@@ -24,7 +25,7 @@ export class ManageUserComponent implements OnInit{
   role?: string;
   action?:string;
   editedPassword?:string;
-  constructor(public userService: UserService) {
+  constructor(public userService: UserService,private authService: AuthService) {
     this.stateOptions = [{label: 'Classic', value: 'Classic'}, {label: 'Admin', value: 'Admin'}];
   }
 
@@ -37,6 +38,7 @@ export class ManageUserComponent implements OnInit{
       this.users = users;
       console.log(this.users)
     });
+    this.authService.sessionDistory();
   }
 
   showAddUserModalDialog(){
@@ -57,7 +59,7 @@ export class ManageUserComponent implements OnInit{
     this.displayEditUserModal = true;
   }
   addNewUser(){
-    if(this.isDisableAddUserForm()==false){
+    if(!this.isDisableAddUserForm()){
       let user:User ={
         id: this.userService.generateId(),
         name: this.name,
@@ -89,16 +91,13 @@ export class ManageUserComponent implements OnInit{
     this.displayDeleteUserModal = false;
   }
   isDisableAddUserForm():boolean{
-    if(this.name == null || this.email==null
-      || this.password==null || this.role==null
-      || this.name.replaceAll(' ','')==''
-      || this.email.replaceAll(' ','')==''
-      || this.password.replaceAll(' ','')==''
-      || this.password?.search(' ')!=-1
-      ){
-      return true;
-    }
-    return false;
+    return this.name == null || this.email == null
+      || this.password == null || this.role == null
+      || this.name.replaceAll(' ', '') == ''
+      || this.email.replaceAll(' ', '') == ''
+      || this.password.replaceAll(' ', '') == ''
+      || this.password?.search(' ') != -1;
+
   }
 
   totalUsers():number{
@@ -130,14 +129,11 @@ export class ManageUserComponent implements OnInit{
 
   }
   isDisableEditUserForm():boolean{
-    if(this.userToEdit.name == null || this.userToEdit.email==null
-      || this.userToEdit.role==null
-      || this.userToEdit.name.replaceAll(' ','')==''
-      || this.userToEdit.email.replaceAll(' ','')==''
-    ){
-      return true;
-    }
-    return false;
+    return this.userToEdit.name == null || this.userToEdit.email == null
+      || this.userToEdit.role == null
+      || this.userToEdit.name.replaceAll(' ', '') == ''
+      || this.userToEdit.email.replaceAll(' ', '') == '';
+
   }
   allUsers(){
 

@@ -10,7 +10,6 @@ import {AuthService} from "../../../../../services/auth/auth.service";
 })
 
 export class UpdateComponent implements OnInit{
-  @Input()
   assignmentToEdit!: any;
   submitted: boolean = false;
   modalDisplayed: boolean = false;
@@ -24,6 +23,7 @@ export class UpdateComponent implements OnInit{
   ngOnInit(): void {
     this.assignmentToEdit = this.assignmentService.configAssignmentToEdit.assignment;
     this.modalDisplayed = this.assignmentService.configAssignmentToEdit.modalOpened;
+    this.authService.sessionDistory();
   }
 
   saveEdit() {

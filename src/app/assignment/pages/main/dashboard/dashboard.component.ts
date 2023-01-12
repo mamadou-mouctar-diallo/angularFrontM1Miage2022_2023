@@ -23,7 +23,7 @@ export class DashboardComponent implements OnInit{
   sortKey: any;
   assignments!: Assignment[];
   stateAssignement!: { onTime: string; rendered: string; pastTime: string };
-  isThereASession: boolean = false;
+  isUserLogged: boolean = false;
   constructor(private messagesService: MessagesService, public authService: AuthService, private assignmentService: AssignmentService) {
   }
   ngOnInit(): void {
@@ -40,6 +40,7 @@ export class DashboardComponent implements OnInit{
       rendered: "Devoir rendu",
       pastTime: "Délais du devoir passé"
     }
+    this.isUserLogged = this.authService.isUserLogged();
   }
   cours: string [] = ['algebre.png', 'anglais.png', 'gestion_financiere.png','intelligence_artificielle.png','management_si.png','math_analyse.png', 'math_big_data.png',
   'web.png'

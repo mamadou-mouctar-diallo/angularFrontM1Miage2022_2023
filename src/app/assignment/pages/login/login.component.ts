@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit, AfterViewInit{
   message!: string;
   private assignments?: Assignment[];
   @ViewChild('toast')toast!: any;
-  constructor(private loginService: AuthService, private assignmentService: AssignmentService, private route: Router) {
+  constructor(private authService: AuthService, private assignmentService: AssignmentService, private route: Router) {
   }
 
   ngAfterViewInit(): void {
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit, AfterViewInit{
     }
 
   onSubmit() {
-    this.loginService.makeSession({email: this.email, password: this.password}).subscribe(data => {
+    this.authService.makeSession({email: this.email, password: this.password}).subscribe(data => {
       console.log(data)
      if(data.msg.startsWith('bearer')){
        localStorage.setItem('token', data.msg);
