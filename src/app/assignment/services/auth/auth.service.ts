@@ -46,7 +46,8 @@ export class AuthService {
   private isTokenExpired(): boolean{
     const token: any = this.decodeTheToken(this.getToken());
     if(token === null) return false;
-    return Math.floor((new Date).getTime()/60000) >= Math.floor(token.exp/60);
+    // return Math.floor((new Date).getTime()/60000) >= Math.floor(token.exp/60);
+    return false;
   }
 
   getToken(): string{
