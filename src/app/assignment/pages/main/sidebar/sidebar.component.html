@@ -1,11 +1,12 @@
 <div *ngIf="this.configService.isDesktop()" class="card layout-menu-plus {{this.configService.isMobile()}}">
-  <ng-container *ngFor="let item of model; let i = index;">
-    <div  class="layout-menu-title">{{item.label.toUpperCase()}}</div>
-    <div *ngFor="let el of item.items">
-     <div class="routeLink">
-       <i class="{{el.icon}}"></i>
-       <span [routerLink]="el.routerLink">{{el.label}}</span>
-     </div>
+
+  <ng-container *ngFor="let el of model;">
+    <div  class="layout-menu-title">{{el.label.toUpperCase()}}</div>
+    <div >
+      <div class="routeLink">
+        <i class="{{el.item.icon}}"></i>
+        <span [routerLink]="el.item.routerLink">{{el.item.label}}</span>
+      </div>
     </div>
 
   </ng-container>
@@ -16,12 +17,12 @@
 <ng-template pTemplate="header"><h2>Menu principal</h2></ng-template>
 <ng-template pTemplate="content">
   <div class="layout-mobile">
-  <ng-container *ngFor="let item of model; let i = index;">
-    <div  class="layout-menu-title">{{item.label.toUpperCase()}}</div>
-    <div *ngFor="let el of item.items">
+  <ng-container *ngFor="let el of model;">
+    <div  class="layout-menu-title">{{el.label.toUpperCase()}}</div>
+    <div >
       <div class="routeLink">
-        <i class="{{el.icon}}"></i>
-        <span [routerLink]="el.routerLink">{{el.label}}</span>
+        <i class="{{el.item.icon}}"></i>
+        <span [routerLink]="el.item.routerLink">{{el.item.label}}</span>
       </div>
     </div>
 

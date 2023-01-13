@@ -22,17 +22,19 @@ export class HeaderComponent implements OnInit{
     if (!this.loginService.isUserLogged()) this.route.navigate(['connect'])
   }
   logOut(){
-    this.loginService.sessionDistory();
+    // this.loginService.sessionDistory();
+    if (this.loginService.isUserLogged()){
+      this.route.navigate(['connect'])
+      localStorage.clear();
+    }
   }
+
 
   toggleMenu() {
     this.configService.onMenuToggle();
   }
 
   ngOnInit(): void {
-
-    console.log(this.configService.isMobile());
-    console.log(window.innerWidth)
   }
 
   profile() {

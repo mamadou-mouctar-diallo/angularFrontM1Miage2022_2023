@@ -24,9 +24,9 @@ export class AuthService {
    return  this.http.post<any>(URL+"/users/login", obj);
   }
   public sessionDistory(){
-   if (this.isTokenExpired()){
+   if(this.isTokenExpired()){
      localStorage.clear();
-     console.log(this.isTokenExpired())
+     this.router.navigate(['connect']);
    }
   }
 
@@ -46,7 +46,7 @@ export class AuthService {
   private isTokenExpired(): boolean{
     const token: any = this.decodeTheToken(this.getToken());
     if(token === null) return false;
-    return Math.floor((new Date).getTime() / 10) >= token.exp;
+    return Math.floor((new Date).getTime()/60000) >= Math.floor(token.exp/60);
   }
 
   getToken(): string{

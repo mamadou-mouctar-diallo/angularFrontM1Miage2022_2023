@@ -19,25 +19,27 @@ export class SidbebarComponent implements OnInit{
     this.model = [
       {
         label: 'Home',
-        items: [
-          {
+        item: {
             label: 'Dashboard',
             icon: 'pi pi-fw pi-home',
             routerLink: ['/']
           }
-        ]
       },
       {
-        label: 'devoirs',
-        items: [
-          {label: 'Manage assignments', icon: 'pi pi-folder-open', routerLink: ['/assignments']},
-        ]
+        label: 'Devoirs',
+        item: {
+            label: 'Manage assignments',
+            icon: 'pi pi-folder-open',
+            routerLink: ['/assignments']
+          }
       },
       {
         label: 'utilisateurs',
-        items: [
-          {label: 'Manage users', icon: 'pi pi-folder-open', routerLink: ['/users']},
-        ]
+        item: {
+          label: 'Manage users',
+          icon: 'pi pi-folder-open',
+          routerLink: ['/users']
+        }
       }
     ]
   }

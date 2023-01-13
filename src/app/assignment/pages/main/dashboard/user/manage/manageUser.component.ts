@@ -36,7 +36,6 @@ export class ManageUserComponent implements OnInit{
   ngOnInit(): void {
     this.userService.getAll().subscribe(users => {
       this.users = users;
-      console.log(this.users)
     });
     this.authService.sessionDistory();
   }
@@ -101,7 +100,7 @@ export class ManageUserComponent implements OnInit{
   }
 
   totalUsers():number{
-    return this.users.length;
+    return this.users !== undefined? this.users.length: 0;
   }
   cancelModal(modal:string){
     if(modal=="editModal"){
