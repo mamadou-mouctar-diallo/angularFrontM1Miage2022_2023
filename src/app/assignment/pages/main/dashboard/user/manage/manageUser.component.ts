@@ -2,7 +2,6 @@ import {Component, OnInit, ViewChild} from "@angular/core";
 import {UserService} from "../../../../../services/user/user.service"
 import {Table} from "primeng/table";
 import {User} from "../../../../../models/user";
-import {Router} from "@angular/router";
 import {AuthService} from "../../../../../services/auth/auth.service";
 import {FormService} from "../../../../../services/form.service";
 @Component({

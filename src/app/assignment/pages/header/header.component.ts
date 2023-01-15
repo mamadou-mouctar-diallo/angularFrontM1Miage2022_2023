@@ -21,8 +21,6 @@ export class HeaderComponent implements OnInit{
   displayUserInformationModal:boolean=false;
   displayEditUserInformationModal:boolean=false;
   actualUserToEdit!: any;
-  allUsers!: User[];
-  editUser!:any;
   ancienPassword!:string |undefined;
 
   logIn() {
