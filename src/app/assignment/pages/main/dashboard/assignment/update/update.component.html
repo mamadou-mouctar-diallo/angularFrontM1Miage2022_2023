@@ -1,7 +1,7 @@
 <div class="grid">
   <div class="col-12">
     <div class="card px-6 py-6">
-    <p-dialog [(visible)]="modalDisplayed" [style]="{width: '50rem'}" header="Modification Devoir" [modal]="true" class="p-fluid" [closable]="false">
+    <p-dialog [(visible)]="modalDisplayed" [style]="{width: '50vw'}" header="Modification Devoir" [modal]="true" class="p-fluid" [closable]="false" [blockScroll]="false">
       <ng-template pTemplate="content">
         <img [src]="assignmentToEdit.course.coursePhoto" [alt]="assignmentToEdit.name" width="150" class="mt-0 mx-auto mb-5 block shadow-2" *ngIf="assignmentToEdit.course.coursePhoto">
         <div class="field">

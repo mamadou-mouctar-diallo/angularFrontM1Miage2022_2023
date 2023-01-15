@@ -81,7 +81,6 @@ export class DashboardComponent implements OnInit{
   }
 
   showModalDialog(assigment: Assignment): void {
-    console.log(assigment.course)
     this.selectedAssignment = assigment;
     this.displayModal = true;
   }
@@ -99,7 +98,7 @@ export class DashboardComponent implements OnInit{
   }
 
   totalAssignmentInDealine(): number{
-    return this.assignments.filter(assignment => !assignment.rendered && !this.isOutOfDeadLine(assignment.deadLine)).length;
+    return this.assignments.filter(assignment => !assignment.rendered && assignment.mark !== null && !this.isOutOfDeadLine(assignment.deadLine)).length;
   }
 
   totalAssignmentOutDealine(): number {
