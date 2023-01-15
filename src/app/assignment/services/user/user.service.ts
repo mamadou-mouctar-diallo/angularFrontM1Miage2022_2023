@@ -4,12 +4,20 @@ import {HttpClient} from "@angular/common/http";
 import {User} from "../../models/user";
 import {URL} from "../../utils/utils";
 import {Observable} from "rxjs";
+import {configAssignment} from "../assignment/assignment.service";
 
+export interface configUser {
+  modalOpened: boolean,
+  user: any
+
+};
 @Injectable({
   providedIn: "root"
 })
 
 export class UserService implements OnInit{
+
+  configUserToEdit!: configUser;
 private prefix: string = "/users";
   constructor(private http: HttpClient) {
   }
@@ -36,7 +44,7 @@ private prefix: string = "/users";
     return this.http.put<any>(URL+this.prefix+'/update/'+user._id, user);
   }
   updateUserById(user:any): Observable<any> {
-    return this.http.put<any>(URL+this.prefix+'/update/${user.id}', user);
+    return this.http.put<any>(URL+this.prefix+'/update', user);
   }
 
   ngOnInit(): void {

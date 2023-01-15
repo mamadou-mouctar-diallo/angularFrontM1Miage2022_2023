@@ -43,11 +43,14 @@ export class HeaderComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    //this.actualUserToEdit = this.userService.configUserToEdit.user;
   }
 
   profile() {
     this.actualUser=this.authService.getActualUser();
     console.log(this.actualUser._id);
+    console.log(this.actualUser);
+    console.log(this.actualUser.password);
     if(this.actualUser!==null || this.actualUser!==undefined){
       this.displayUserInformationModal=true;
     }
@@ -55,7 +58,7 @@ export class HeaderComponent implements OnInit{
   editUserProfile(){
     //this.displayUserInformationModal=false;
     this.displayEditUserInformationModal=true;
-    //this.editUser=this.actualUser;
+    this.editUser=this.actualUser;
     this.actualUserToEdit = {
       id:this.actualUser?.id,
       name:this.actualUser?.name,
@@ -63,23 +66,34 @@ export class HeaderComponent implements OnInit{
       password:this.actualUser?.password,
       role:this.actualUser?.role
     };
-    this.actualUserToEdit= this.actualUser;
+    // this.actualUserToEdit.id=this.actualUser?.id;
+    // this.actualUserToEdit.name=this.actualUser?.name;
+    // this.actualUserToEdit.email=this.actualUser?.email;
+    // this.actualUserToEdit.password=this.actualUser?.password;
+    // this.actualUserToEdit.role=this.actualUser?.role;
+    console.log(this.actualUser._id);
+    console.log(this.actualUserToEdit._id);
+    //this.actualUserToEdit= this.actualUser;
   }
   confirmEditUser(){
-    //console.log(this.actualUserToEdit);
-    //this.actualUserToEdit._id=this.actualUser._id;
-    // this.userService.getAll().subscribe(users => {
-    //   for (const user of users){
-    //     if(user.email===this.actualUserToEdit.email){
-    //       this.editUser=user;
-    //       this.actualUserToEdit._id=this.editUser._id;
-    //     }
-    //   }
-    //   this.allUsers = users;
-    // });
-    console.log(this.actualUserToEdit);
-    this.userService.updateUser(this.actualUserToEdit).subscribe(user=>{
-      console.log(user)
+    this.userService.getAll().subscribe(users => {
+      for (const user of users){
+        if(user.id===this.actualUserToEdit.id){
+          this.editUser=user;
+          //this.actualUserToEdit._id=this.editUser._id;
+          console.log(this.editUser._id);
+          console.log("user correspond à:")
+          console.log(user);
+          user.email=this.actualUserToEdit.email;
+          user.name=this.actualUserToEdit.name;
+          console.log("We are editing the user profile:")
+          console.log(user);
+          this.userService.updateUser(user).subscribe(user=>{
+            console.log(user)
+          });
+        }
+      }
+      this.allUsers = users;
     });
     this.displayUserInformationModal=true;
     this.displayEditUserInformationModal=false;

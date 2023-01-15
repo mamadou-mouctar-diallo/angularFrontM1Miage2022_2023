@@ -37,7 +37,7 @@
 </div>
 
 <!--Boite de dialogue pour la visualisation des infos de l'utilisateur-->
-<p-dialog header="Informations de l'Utilisateur" [(visible)]="displayUserInformationModal" [modal]="true" [style]="{width: '50vw'}" class="p-fluid"
+<p-dialog header="Informations de l'Utilisateur" [(visible)]="displayUserInformationModal" [modal]="true" [style]="{width: '40vw'}" class="p-fluid"
           [draggable]="false" [resizable]="false">
   <ng-template pTemplate="body">
     <p-divider></p-divider>
@@ -50,7 +50,7 @@
         <p>{{actualUser?.name}}</p>
       </div>
       <div class="flex justify-content-between">
-        <h6>Email de l'utilisateur:</h6>
+        <h6>Email:</h6>
         <p>{{actualUser?.email}}</p>
       </div>
       <div class="flex justify-content-between">
@@ -58,7 +58,7 @@
         <p>************</p>
       </div>
       <div class="flex justify-content-between">
-        <h6>Role de l'utilisateur:</h6>
+        <h6>Role:</h6>
         <p>{{actualUser?.role}}</p>
       </div>
     </div>
@@ -70,14 +70,19 @@
 </p-dialog>
 
 <!--Boite de dialogue pour la modification de l'utilisateur-->
-<p-dialog header="Modification de l'Utilisateur" [(visible)]="displayEditUserInformationModal" [modal]="true" [style]="{width: '50vw'}" class="p-fluid"
+<p-dialog header="Modification de l'Utilisateur" [(visible)]="displayEditUserInformationModal" [modal]="true" [style]="{width: '40vw'}" class="p-fluid"
           [draggable]="false" [resizable]="false">
   <ng-template pTemplate="body">
     <p-divider></p-divider>
     <h5 class="m-0">
-      <i class="pi pi-user-edit" style="font-size: 2rem">  Edit</i>
+      <i class="pi pi-user-edit" style="font-size: 2rem">  Modifier mes informations</i>
     </h5>
     <div class=" card  mt-2">
+
+      <!--div class="field">
+        <label for="password">Nouveau mot de passe:</label>
+        <p-password [(ngModel)]="editedPassword"  id="editedPassword" name="password" [toggleMask] ="true"></p-password>
+      </div-->
       <div class="field">
         <label for="name">Nom de l'utilisateur:</label>
         <input type="text" pInputText [(ngModel)]="actualUserToEdit.name" id="name" name="name"/>
@@ -88,10 +93,6 @@
         <input type="text" pInputText [(ngModel)]="actualUserToEdit.email" id="email" name="email"/>
         <small class="p-error block" *ngIf="actualUserToEdit.email==null || actualUserToEdit.email.replaceAll(' ','')==''">Email is required.</small>
       </div>
-      <!--div class="field">
-        <label for="password">Nouveau mot de passe:</label>
-        <p-password [(ngModel)]="editedPassword"  id="editedPassword" name="password" [toggleMask] ="true"></p-password>
-      </div-->
     </div>
   </ng-template>
   <ng-template pTemplate="footer">

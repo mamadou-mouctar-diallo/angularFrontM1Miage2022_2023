@@ -47,6 +47,9 @@ export class ManageUserComponent implements OnInit{
 
   showEditUserModalDialog(user:User){
     this.action='editing';
+    console.log("editing: ")
+    //let decipher = CryptoJS.AES.decrypt(user.password, "CIPHERKEY").toString(CryptoJS.enc.Utf8);
+    console.log(user)
     this.userToEdit = {
       id:user.id,
       name:user.name,

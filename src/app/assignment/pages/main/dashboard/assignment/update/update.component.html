@@ -13,19 +13,6 @@
           <label for="comment">Commentaire</label>
           <textarea id="comment" pInputTextarea [(ngModel)]="assignmentToEdit.comment" required rows="3" cols="20"></textarea>
         </div>
-
-<!--        <div class="field">-->
-<!--          <label for="status">Inventory Status</label>-->
-<!--          <p-dropdown id="status" [options]="statuses" optionLabel="label" [(ngModel)]="assignmentToEdit.deadLine" placeholder="Select a Status">-->
-<!--            <ng-template pTemplate="selectedItem">-->
-<!--              <span *ngIf="product && product.inventoryStatus" [class]="'product-badge status-' + product.inventoryStatus.value.toLowerCase()">{{product.inventoryStatus.value}}</span>-->
-<!--            </ng-template>-->
-<!--            <ng-template let-status pTemplate="status">-->
-<!--              <span [class]="'product-badge status-' + status.value.toLowerCase()">{{status.label}}</span>-->
-<!--            </ng-template>-->
-<!--          </p-dropdown>-->
-<!--        </div>-->
-
         <div class="formgrid grid">
           <div class="field col">
             <label for="dateRendu">Date de rendu actuelle</label>
@@ -47,7 +34,6 @@
           </div>
         </div>
       </ng-template>
-
       <ng-template pTemplate="footer">
         <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="cancelEdit()"></button>
         <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveEdit()"></button>

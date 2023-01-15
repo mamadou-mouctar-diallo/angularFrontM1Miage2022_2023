@@ -14,6 +14,7 @@
             <th >Matière</th>
             <th></th>
             <th>Action</th>
+            <th></th>
             <th><button pButton pRipple class="p-button-success" (click)="showAddAssignment()" icon="pi pi-plus" label="Ajouter devoir"></button></th>
           </tr>
         </ng-template>
@@ -37,6 +38,10 @@
             <td>
               <div class="flex">
                 <button pButton pRipple pTooltip="Modifier ce devoir" icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editAssignment(assignment)"></button>
+              </div>
+            </td>
+            <td>
+              <div class="flex">
                 <button pButton pRipple pTooltip="Supprimer ce devoir" icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteAssignment(assignment)"></button>
               </div>
             </td>
