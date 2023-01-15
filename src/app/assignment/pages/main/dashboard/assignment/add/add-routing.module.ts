@@ -4,6 +4,7 @@ import {AddComponent} from "./add.component";
 import {Assignment} from "./assignment";
 import {Student} from "./student";
 import {Course} from "./course";
+import {LoginGuard} from "../../../../../guards/login.guard";
 
 @NgModule({
 imports: [
@@ -13,9 +14,9 @@ RouterModule.forChild([
     component: AddComponent,
     children: [
       {path: '', redirectTo: 'assignment', pathMatch: 'full'},
-      {path: 'assignment', component: Assignment},
-      {path: 'student', component: Student},
-      {path: 'course', component: Course}
+      {path: 'assignment', component: Assignment, canActivate: [LoginGuard]},
+      {path: 'student', component: Student, canActivate: [LoginGuard]},
+      {path: 'course', component: Course, canActivate: [LoginGuard]}
     ]
   }
 ])

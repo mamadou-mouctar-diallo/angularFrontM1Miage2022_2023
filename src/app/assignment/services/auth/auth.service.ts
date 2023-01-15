@@ -57,7 +57,7 @@ export class AuthService {
   public getToken(): string{
     return localStorage.getItem('token') || 'vide';
   }
-  private decodeTheToken(token: string){
+  public decodeTheToken(token: string){
     try {
       return jwt_decode(token);
     }catch (err) {

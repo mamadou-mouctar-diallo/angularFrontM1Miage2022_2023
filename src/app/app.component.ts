@@ -10,8 +10,7 @@ import {AuthService} from "./assignment/services/auth/auth.service";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent{
-  constructor(public _loader: LoaderService, private configService: ConfigService, public authService: AuthService) {
-  // this.authService.sessionDistory();
+  constructor(public _loader: LoaderService, public configService: ConfigService, public authService: AuthService) {
   }
   onResizeWindow(){
     this.configService.isMobile();
