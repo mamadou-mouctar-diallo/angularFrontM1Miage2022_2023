@@ -1,9 +1,10 @@
-import {Component,OnInit} from "@angular/core";
+import {Component, OnInit, ViewChild} from "@angular/core";
 import {UserService} from "../../../../../services/user/user.service"
 import {Table} from "primeng/table";
 import {User} from "../../../../../models/user";
 import {Router} from "@angular/router";
 import {AuthService} from "../../../../../services/auth/auth.service";
+import {FormService} from "../../../../../services/form.service";
 @Component({
   selector: "app-manage",
   templateUrl: "manageUser.component.html"
@@ -26,18 +27,16 @@ export class ManageUserComponent implements OnInit{
   action?:string;
   editedPassword?:string;
   addUserString="Ajouter un Utilisateur";
-  constructor(public userService: UserService,private authService: AuthService) {
+  @ViewChild('dt') dt!: Table;
+  constructor(public userService: UserService,private authService: AuthService, public formService: FormService) {
     this.stateOptions = [{label: 'Classic', value: 'Classic'}, {label: 'Admin', value: 'Admin'}];
-  }
-
-  onGlobalFilter(dt: Table, assignmentName: Event) {
-    // dt.(assignmentName, 'contains');
   }
 
   ngOnInit(): void {
     this.userService.getAll().subscribe(users => {
       this.users = users;
     });
+    this.formService.initSortField();
   }
 
   showAddUserModalDialog(){

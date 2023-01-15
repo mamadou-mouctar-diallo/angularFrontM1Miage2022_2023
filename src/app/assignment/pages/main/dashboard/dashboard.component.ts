@@ -4,6 +4,7 @@ import {Assignment} from "../../../models/assignment";
 import {MenuItem} from "../../../interfaces/interfaces";
 import {AssignmentService} from "../../../services/assignment/assignment.service";
 import {AuthService} from "../../../services/auth/auth.service";
+import {FormService} from "../../../services/form.service";
 
 export interface SelectedItem{ label: string, value: string }
 export interface StateAssignment {
@@ -24,7 +25,7 @@ export class DashboardComponent implements OnInit{
   assignments!: Assignment[];
   stateAssignement!: { onTime: string; rendered: string; pastTime: string };
   isUserLogged: boolean = false;
-  constructor(private messagesService: MessagesService, public authService: AuthService, private assignmentService: AssignmentService) {
+  constructor(public formService: FormService, private messagesService: MessagesService, public authService: AuthService, private assignmentService: AssignmentService) {
   }
   ngOnInit(): void {
     this.sortOptions = [
@@ -40,6 +41,7 @@ export class DashboardComponent implements OnInit{
       pastTime: "Délais du devoir passé"
     }
     this.isUserLogged = this.authService.isUserLogged();
+    this.formService.initSortField();
   }
   cours: string [] = ['algebre.png', 'anglais.png', 'gestion_financiere.png','intelligence_artificielle.png','management_si.png','math_analyse.png', 'math_big_data.png',
   'web.png'
@@ -51,25 +53,8 @@ export class DashboardComponent implements OnInit{
   selectedAssignment!: Assignment;
 
   sortOptions!: SelectedItem[] ;
-
-  sortOrder!: number;
-
-  sortField!: string;
   displayModal: boolean = false;
   assignmentName!: string;
-
-  onSortChange(event: any) {
-    let value = event.value;
-
-    if (value.indexOf('!') === 0) {
-      this.sortOrder = -1;
-      this.sortField = value.substring(1, value.length);
-    }
-    else {
-      this.sortOrder = 1;
-      this.sortField = value;
-    }
-  }
 
   isOutOfDeadLine(deadLine: Date): boolean{
     let newDate = new Date();

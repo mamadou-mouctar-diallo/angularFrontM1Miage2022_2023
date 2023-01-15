@@ -1,4 +1,5 @@
 import {Injectable, OnInit} from "@angular/core";
+import {Table} from "primeng/table";
 
 @Injectable()
 export class FormService implements OnInit{
@@ -15,6 +16,8 @@ export class FormService implements OnInit{
     mark: '',
     comment: ''
   };
+  sortOrder!: number;
+  sortField!: string;
   constructor() {
   }
 
@@ -31,5 +34,24 @@ export class FormService implements OnInit{
   }
   isSelectedCourse(): boolean{
     return this.assignmentToAdd.course.name !== "";
+  }
+  onSortChange(event: any) {
+    let value = event.value;
+
+    if (value.indexOf('!') === 0) {
+      this.sortOrder = -1;
+      this.sortField = value.substring(1, value.length);
+    }
+    else {
+      this.sortOrder = 1;
+      this.sortField = value;
+    }
+  }
+  initSortField(): void {
+    this.sortOrder = 0;
+    this.sortField = '';
+  }
+  filter(dt: Table, $event: Event) {
+    dt.filterGlobal(($event.target as HTMLInputElement).value, 'contains');
   }
 }

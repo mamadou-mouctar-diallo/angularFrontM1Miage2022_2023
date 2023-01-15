@@ -53,10 +53,10 @@
   </div>
   <div class="col-12">
     <div class="card">
-      <p-dataView #assignmentContainer [value]="assignments" [paginator]="true" [rows]="9" filterBy="name" [sortField]="sortField" [sortOrder]="sortOrder" layout="grid">
+      <p-dataView #assignmentContainer [value]="assignments" [paginator]="true" [rows]="9" filterBy="name" [sortField]="formService.sortField" [sortOrder]="formService.sortOrder" layout="grid">
         <ng-template pTemplate="header">
           <div class="flex flex-column md:flex-row md:justify-content-between gap-2">
-            <p-dropdown [options]="sortOptions" placeholder="Trier par en rendu" (onChange)="onSortChange($event)"></p-dropdown>
+            <p-dropdown [options]="sortOptions" placeholder="Trier par en rendu" (onChange)="formService.onSortChange($event)"></p-dropdown>
             <span class="p-input-icon-left">
                             <i class="pi pi-search"></i>
                             <input type="search" pInputText placeholder="Rechercher nom de devoir" (input)="assignmentContainer.filter(assignmentName)"  [(ngModel)]="assignmentName" >

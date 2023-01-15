@@ -4,6 +4,7 @@ import {AssignmentService} from "../../../../../services/assignment/assignment.s
 import {AuthService} from "../../../../../services/auth/auth.service";
 import {Table} from "primeng/table";
 import {Router} from "@angular/router";
+import {FormService} from "../../../../../services/form.service";
 
 @Component({
   selector: "app-manage",
@@ -14,7 +15,8 @@ export class ManageComponent {
   assignments!: Assignment[];
   finishToDelete: boolean = false;
   finishToEdit: boolean = false;
-  constructor(public assignmentService: AssignmentService, public authService: AuthService, private route: Router) {
+  assignmentName: any;
+  constructor(public assignmentService: AssignmentService, public authService: AuthService, private route: Router,public formService: FormService) {
     this.assignmentService.initConfigAssignmentToEdit();
     this.assignmentService.initConfigAssignmentToDelete();
     this.assignmentService.initConfigAssignmentToAdd();
@@ -49,5 +51,9 @@ export class ManageComponent {
     // this.assignmentService.setConfigAssignmentToAdd({modalOpened: true, assignment: {}})
     console.log("clicked add")
     this.route.navigate(['add'])
+  }
+
+  totalAssignments(): number {
+    return this.assignments.length;
   }
 }

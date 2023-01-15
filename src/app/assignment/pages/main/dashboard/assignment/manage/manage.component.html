@@ -1,17 +1,34 @@
 <div class="grid">
   <div class="col-12">
     <div class="card px-6 py-6">
-      <p-table #dt [value]="assignments"  responsiveLayout="scroll" [rows]="5"  [paginator]="true" [rowsPerPageOptions]="[5,10,15]" [showCurrentPageReport]="true">
+      <p-table  #dt [value]="assignments"  responsiveLayout="scroll" [rows]="5"  [paginator]="true" [rowsPerPageOptions]="[5,10,15]" [showCurrentPageReport]="true"
+      [globalFilterFields]="['name', 'author', 'course']"
+      >
         <ng-template pTemplate="caption">
           <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
-            <h5 class="m-0">Gestion des devoir</h5>
+            <h5 class="m-0">Gestion des devoir</h5>   <div>
+            <span class="block text-500 font-medium mb-3">Total Users : {{totalAssignments()}}</span>
+          </div>
+            <span class="block mt-2 md:mt-0 p-input-icon-left">
+              <i class="pi pi-search"></i>
+              <input pInputText type="text"   [(ngModel)]="assignmentName" placeholder="Recherche"  class="w-full sm:w-auto" (input)="formService.filter(dt, $event)"/>
+            </span>
           </div>
         </ng-template>
         <ng-template pTemplate="header">
           <tr>
-            <th >Nom</th>
-            <th >Auteur</th>
-            <th >Matière</th>
+            <th >
+              Nom
+              <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
+            </th>
+            <th >
+              Auteur
+              <p-columnFilter type="text" field="author" display="menu"></p-columnFilter>
+            </th>
+            <th >
+              Matière
+              <p-columnFilter type="text" field="course" display="menu"></p-columnFilter>
+            </th>
             <th></th>
             <th>Action</th>
             <th></th>
