@@ -28,3 +28,13 @@
     </div>
   </div>
 </div>
+
+<p-dialog [(visible)]="displayModalLogin" header="Modification" [modal]="true" [style]="{width:'450px'}" [closable]="false">
+  <div class="flex align-items-center justify-content-center">
+    <i class="pi pi-exclamation-triangle mr-3 red" style="font-size: 2rem"></i>
+    <span *ngIf="message" class="red">{{message}}</span>
+  </div>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple icon="pi pi-check" class="p-button-text" label="D'accord" (click)="closeModalLogin()"></button>
+  </ng-template>
+</p-dialog>

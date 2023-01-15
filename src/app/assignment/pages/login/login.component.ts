@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit, AfterViewInit{
   message!: string;
   private assignments?: Assignment[];
   @ViewChild('toast')toast!: any;
+  displayModalLogin: boolean = false;
   constructor(private authService: AuthService, private assignmentService: AssignmentService, private route: Router) {
   }
 
@@ -31,6 +32,7 @@ export class LoginComponent implements OnInit, AfterViewInit{
        this.route.navigate(['']).then(err => console.log(err))
      }else {
        this.message = data.msg;
+       this.displayModalLogin = true;
      }
     });
   }
@@ -55,5 +57,9 @@ export class LoginComponent implements OnInit, AfterViewInit{
 
   onReject() {
     this.toast.messageService.clear('c')
+  }
+
+  closeModalLogin() {
+    this.displayModalLogin = false;
   }
 }

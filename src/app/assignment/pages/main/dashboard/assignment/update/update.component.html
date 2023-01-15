@@ -1,7 +1,7 @@
 <div class="grid">
   <div class="col-12">
     <div class="card px-6 py-6">
-    <p-dialog [(visible)]="modalDisplayed" [style]="{width: '50rem'}" header="Modification Devoir" [modal]="true" class="p-fluid">
+    <p-dialog [(visible)]="modalDisplayed" [style]="{width: '50rem'}" header="Modification Devoir" [modal]="true" class="p-fluid" [closable]="false">
       <ng-template pTemplate="content">
         <img [src]="assignmentToEdit.course.coursePhoto" [alt]="assignmentToEdit.name" width="150" class="mt-0 mx-auto mb-5 block shadow-2" *ngIf="assignmentToEdit.course.coursePhoto">
         <div class="field">
@@ -56,7 +56,7 @@
   </div>
 </div>
 
-<p-dialog [(visible)]="this.authService.displayModalAuthorization" header="Autorisation" [modal]="true" [style]="{width:'450px'}">
+<p-dialog [(visible)]="this.authService.displayModalAuthorization" header="Autorisation" [modal]="true" [style]="{width:'450px'}" [closable]="false">
   <div class="flex align-items-center justify-content-center">
     <i class="pi pi-exclamation-triangle mr-3 red" style="font-size: 2rem"></i>
     <span *ngIf="message" class="red">{{message}}</span>
@@ -66,7 +66,7 @@
   </ng-template>
 </p-dialog>
 
-<p-dialog [(visible)]="displayModalModification" header="Modification" [modal]="true" [style]="{width:'450px'}">
+<p-dialog [(visible)]="displayModalModification" header="Modification" [modal]="true" [style]="{width:'450px'}" [closable]="false">
   <div class="flex align-items-center justify-content-center">
     <i class="pi pi-check mr-3 green" style="font-size: 2rem"></i>
     <span *ngIf="message" class="green">{{message}}</span>

@@ -89,7 +89,7 @@
   </div>
 </div>
 <p-dialog *ngIf="selectedAssignment" header="Details de l'assignment" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}"
-          [draggable]="false" [resizable]="false">
+          [draggable]="false" [resizable]="false" [closable]="false">
   <ng-template pTemplate="body">
     <p-divider></p-divider>
     <h5 class="m-0">Infos du devoir</h5>

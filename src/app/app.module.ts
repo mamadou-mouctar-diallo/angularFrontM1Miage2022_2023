@@ -39,7 +39,6 @@ import {LoaderComponent} from "./assignment/pages/loader/loader.component";
 import {ProgressSpinnerModule} from "primeng/progressspinner";
 import {NetworkInterceptor} from "./network.interceptor";
 import {ToastModule} from "primeng/toast";
-import {ManageUserModule} from "./assignment/pages/main/dashboard/user/manage/manageUser.module";
 import {ToolbarModule} from "primeng/toolbar";
 import {SelectButtonModule} from "primeng/selectbutton";
 import {InputNumberModule} from "primeng/inputnumber";
@@ -52,10 +51,7 @@ import {AddModule} from "./assignment/pages/main/dashboard/assignment/add/add.mo
 const routes: Routes = [
   {path: '', component: DashboardComponent, pathMatch: 'full'},
   {path: 'connect', component: LoginComponent},
-  {path: 'assignments', component: ManageComponent, children:[
-      {path: '', redirectTo: 'assignment', pathMatch: 'full'},
-      {path: 'add', loadChildren: () => import('./assignment/pages/main/dashboard/assignment/add/add.module').then(m => m.AddModule)}
-    ]},
+  {path: 'assignments', component: ManageComponent},
   {path: 'users', component: ManageUserComponent},
 ]
 
@@ -98,7 +94,6 @@ const routes: Routes = [
         SidebarModule,
         ProgressSpinnerModule,
         ToastModule,
-        ManageUserModule,
         ToolbarModule,
         SelectButtonModule,
         ToolbarModule,

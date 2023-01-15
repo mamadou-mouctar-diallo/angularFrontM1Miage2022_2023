@@ -1,4 +1,4 @@
-<p-dialog [(visible)]="modalDisplayed" header="Surppression" [modal]="true" [style]="{width:'450px'}">
+<p-dialog [(visible)]="modalDisplayed" header="Surppression" [modal]="true" [style]="{width:'450px'}" [closable]="false">
   <div class="flex align-items-center justify-content-center">
     <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
     <span *ngIf="assignmentToDelete">Etes vous sur de voulloir supprimer ce devoir <b>{{assignmentToDelete.name}}</b> ?</span>
@@ -9,7 +9,7 @@
   </ng-template>
 </p-dialog>
 
-<p-dialog [(visible)]="this.authService.displayModalAuthorization" header="Autorisation" [modal]="true" [style]="{width:'450px'}">
+<p-dialog [(visible)]="this.authService.displayModalAuthorization" header="Autorisation" [modal]="true" [style]="{width:'450px'}" [closable]="false">
   <div class="flex align-items-center justify-content-center">
     <i class="pi pi-exclamation-triangle mr-3 red" style="font-size: 2rem"></i>
     <span *ngIf="message" class="red">{{message}}</span>
@@ -19,7 +19,7 @@
   </ng-template>
 </p-dialog>
 
-<p-dialog [(visible)]="displayModalDeletion" header="Surppression" [modal]="true" [style]="{width:'450px'}">
+<p-dialog [(visible)]="displayModalDeletion" header="Surppression" [modal]="true" [style]="{width:'450px'}" [closable]="false">
   <div class="flex align-items-center justify-content-center">
     <i class="pi pi-check mr-3 green" style="font-size: 2rem"></i>
     <span *ngIf="message" class="green">{{message}}</span>
