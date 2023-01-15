@@ -22,13 +22,12 @@ export class DeleteComponent implements OnInit{
   ngOnInit(): void {
     this.assignmentToDelete = this.assignmentService.configAssignmentToDelete.assignment;
     this.modalDisplayed = this.assignmentService.configAssignmentToDelete.modalOpened;
-    this.authService.sessionDistory();
   }
 
   confirmDelete() {
     this.assignmentService.deleteAssignment(this.assignmentToDelete._id).subscribe(data => {
       console.log(data)
-      if(!this.authService.isUserLogged()){
+      if(!this.authService.isUserLogged() || data.auth){
         this.authService.showAuthorization();
         this.message = data.auth;
       }else {

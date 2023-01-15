@@ -1,11 +1,11 @@
 <p-dialog [(visible)]="modalDisplayed" header="Surppression" [modal]="true" [style]="{width:'450px'}">
   <div class="flex align-items-center justify-content-center">
     <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
-    <span *ngIf="assignmentToDelete">Etes vous sur de voulloir supprimer ce devoir <b>{{assignmentToDelete.name}}</b>?</span>
+    <span *ngIf="assignmentToDelete">Etes vous sur de voulloir supprimer ce devoir <b>{{assignmentToDelete.name}}</b> ?</span>
   </div>
   <ng-template pTemplate="footer">
-    <button pButton pRipple icon="pi pi-times" class="p-button-text" label="Non" (click)="cancelDelete()"></button>
-    <button pButton pRipple icon="pi pi-check" class="p-button-text red " label="Oui" (click)="confirmDelete()"></button>
+    <button pButton pRipple icon="pi pi-times" class="p-button-text " label="Non" (click)="cancelDelete()"></button>
+    <button pButton pRipple icon="pi pi-check" class="p-button-text p-button-danger " label="Oui" (click)="confirmDelete()"></button>
   </ng-template>
 </p-dialog>
 

@@ -14,6 +14,7 @@ export interface configAssignment {
 export class AssignmentService implements OnInit{
   configAssignmentToDelete!: configAssignment;
   configAssignmentToEdit!: configAssignment;
+  configAssignmentToAdd!: configAssignment;
   assignments!: any [];
   assignmentsPrepared!: Assignment [];
   assignmentTemp!: Assignment;
@@ -65,6 +66,11 @@ export class AssignmentService implements OnInit{
     this.configAssignmentToEdit = configAssignment;
     return of(true);
   }
+
+  setConfigAssignmentToAdd(configAssignment: configAssignment): Observable<boolean>{
+    this.configAssignmentToAdd = configAssignment;
+    return of(true);
+  }
   initConfigAssignmentToDelete(): void{
     this.configAssignmentToDelete = {
       modalOpened: false,
@@ -76,6 +82,13 @@ export class AssignmentService implements OnInit{
       modalOpened: false,
       assignment: {}
     };
+  }
+
+  initConfigAssignmentToAdd(): void {
+    this.configAssignmentToAdd = {
+      modalOpened: false,
+      assignment: {}
+    }
   }
 
 }

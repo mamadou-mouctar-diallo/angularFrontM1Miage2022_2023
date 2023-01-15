@@ -37,7 +37,6 @@ export class ManageUserComponent implements OnInit{
     this.userService.getAll().subscribe(users => {
       this.users = users;
     });
-    this.authService.sessionDistory();
   }
 
   showAddUserModalDialog(){

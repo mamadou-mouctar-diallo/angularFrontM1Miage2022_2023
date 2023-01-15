@@ -8,10 +8,8 @@
   </button>
 
 
-    <div pButton *ngIf="!this.authService.isUserLogged()" class="p-button-plain btn-home" (click)="goHome()" >
-      <i class="pi pi-home"></i>
-      <p>Accueil</p>
-    </div>
+    <button pButton pRipple icon="pi pi-home" *ngIf="!this.authService.isUserLogged()" class="p-button-text p-button-success" label="Accueil" (click)="goHome()" >
+    </button>
 
   <button #topbarmenubutton class="p-link layout-topbar-menu-button layout-topbar-button" (click)="this.configService.showProfileSidebar()" >
     <i class="pi pi-ellipsis-v"></i>
@@ -26,9 +24,9 @@
       <i class="pi pi-envelope"></i>
       <span>Messages</span>
     </button>
-    <button class="p-link layout-topbar-button" (click)="this.loginService.isUserLogged()? profile(): logIn()">
-      <i class="pi {{this.loginService.isUserLogged() ? 'pi-user' : 'pi-unlock red'}}"></i>
-      <span>{{this.loginService.isUserLogged() ? 'Profile' : 'Connexion'}}</span>
+    <button pButton pRipple class="p-button-text" (click)="this.loginService.isUserLogged()? profile(): logIn()"
+            icon="pi {{this.loginService.isUserLogged() ? 'pi-user' : 'pi-unlock'}}"
+    label="{{this.loginService.isUserLogged() ? 'Profile' : 'Connexion'}}">
     </button>
     <p-divider *ngIf="this.configService.isMobile() && this.authService.isUserLogged()"></p-divider>
     <button *ngIf="this.loginService.isUserLogged()" class="p-link layout-topbar-button" (click)="logOut()">

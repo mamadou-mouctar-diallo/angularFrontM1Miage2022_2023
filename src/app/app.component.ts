@@ -11,7 +11,7 @@ import {AuthService} from "./assignment/services/auth/auth.service";
 })
 export class AppComponent{
   constructor(public _loader: LoaderService, private configService: ConfigService, public authService: AuthService) {
-
+  // this.authService.sessionDistory();
   }
   onResizeWindow(){
     this.configService.isMobile();

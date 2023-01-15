@@ -14,7 +14,7 @@
             <th >Matière</th>
             <th></th>
             <th>Action</th>
-            <th><button pButton class="p-button-success"><i class="pi pi-plus"> </i> Ajouter devoir</button></th>
+            <th><button pButton pRipple class="p-button-success" (click)="showAddAssignment()" icon="pi pi-plus" label="Ajouter devoir"></button></th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-assignment>
@@ -49,3 +49,4 @@
 
 <app-update *ngIf="assignmentService.configAssignmentToEdit.modalOpened" (finishToEdit)="finishToEdit"></app-update>
 <app-delete *ngIf="assignmentService.configAssignmentToDelete.modalOpened" (finishToDelete)="finishToDelete"></app-delete>
+<app-addAssignment *ngIf="assignmentService.configAssignmentToAdd.modalOpened"></app-addAssignment>

@@ -1,68 +1,79 @@
-<div class="grid">
-  <div class="col-12">
-      <div class="card px-6 py-6">
-        <div class="w-full surface-card py-4 px-2 sm:px-8" style="border-radius:53px">
-          <div class="text-center mb-4">
-            <div class="mb-3 bg-blue text-center">Formulaire d'ajout d'un devoir</div>
-          </div>
-          <div class="flex flex-nowrap justify-content-between">
-            <div>
-              <div class="mb-4">
-                <h4>Informations sur le devoir</h4>
-              </div>
-              <p-divider></p-divider>
-              <div class="mb-4">
-                <label for="Name1" class="block text-900 text-xl font-medium mb-2">Nom du devoir</label>
-                <input id="Name1" type="text" placeholder="Nom du devoir" pInputText class="w-full md:w-30rem" style="padding:1rem" [(ngModel)]="email" name="email">
-              </div>
-              <div class="mb-4">
-                <label  class="block text-900 font-medium text-xl mb-2">Date de rendu</label>
-                <p-calendar inputId="calendar" class="w-full md:w-30rem mb-3" [showIcon]="true" placeholder="Date de rendu"></p-calendar>
-              </div>
-              <div class="mb-4">
-                <label  class="block text-900 font-medium text-xl mb-2">Date de rendu</label>
-                <p-dropdown [options]="authors" [(ngModel)]="selectedAutor" optionLabel="student" filterBy="name" [showClear]="true" placeholder="Selectionner l'eleve"></p-dropdown>
-              </div>
-              <div class="field">
-                <label for="comment1" class="block text-900 font-medium text-xl mb-2">Commentaire</label>
-                <textarea id="comment1" pInputTextarea required rows="3" cols="20" [autoResize]="true" style="width: 30vw; height: 30vh;"></textarea>
-              </div>
-            </div>
+<!--<p-dialog>-->
+<!--  <div class="grid">-->
+<!--    <div class="col-12">-->
+<!--      <div class="card px-6 py-6">-->
+<!--        <div class="w-full surface-card py-4 px-2 sm:px-8" style="border-radius:53px">-->
+<!--          <div class="text-center mb-4">-->
+<!--            <div class="mb-3 bg-blue text-center">Formulaire d'ajout d'un devoir</div>-->
+<!--          </div>-->
+<!--          <div class="flex flex-nowrap justify-content-between">-->
+<!--            <div>-->
+<!--              <div class="mb-4">-->
+<!--                <h4>Informations sur le devoir</h4>-->
+<!--              </div>-->
+<!--              <p-divider></p-divider>-->
+<!--              <div class="mb-4">-->
+<!--                <label for="Name1" class="block text-900 text-xl font-medium mb-2">Nom du devoir</label>-->
+<!--                <input id="Name1" type="text" placeholder="Nom du devoir" pInputText class="w-full md:w-30rem" style="padding:1rem" [(ngModel)]="email" name="email">-->
+<!--              </div>-->
+<!--              <div class="mb-4">-->
+<!--                <label  class="block text-900 font-medium text-xl mb-2">Date de rendu</label>-->
+<!--                <p-calendar inputId="calendar" class="w-full md:w-30rem mb-3" [showIcon]="true" placeholder="Date de rendu"></p-calendar>-->
+<!--              </div>-->
+<!--              <div class="mb-4">-->
+<!--                <label  class="block text-900 font-medium text-xl mb-2">Date de rendu</label>-->
+<!--                <p-dropdown [options]="authors" [(ngModel)]="selectedAutor" optionLabel="student" filterBy="name" [showClear]="true" placeholder="Selectionner l'eleve"></p-dropdown>-->
+<!--              </div>-->
+<!--              <div class="field">-->
+<!--                <label for="comment1" class="block text-900 font-medium text-xl mb-2">Commentaire</label>-->
+<!--                <textarea id="comment1" pInputTextarea required rows="3" cols="20" [autoResize]="true" style="width: 30vw; height: 30vh;"></textarea>-->
+<!--              </div>-->
+<!--            </div>-->
 
-            <p-divider layout="vertical">
-              <b>Et</b>
-            </p-divider>
-            <div>
-              <div class="mb-4">
-                <h4>Informations sur l'enseignement</h4>
-              </div>
-              <p-divider></p-divider>
-              <div class="mb-4">
-                <label for="Name" class="block text-900 text-xl font-medium mb-2">Nom du devoir</label>
-                <input id="Name" type="text" placeholder="Nom du devoir" pInputText class="w-full md:w-30rem" style="padding:1rem" [(ngModel)]="email" name="email">
-              </div>
-              <div class="mb-4">
-                <label  class="block text-900 font-medium text-xl mb-2">Date de rendu</label>
-                <p-calendar inputId="calendar" class="w-full md:w-30rem mb-3" [showIcon]="true" placeholder="Date de rendu"></p-calendar>
-              </div>
-              <div class="mb-4">
-                <label  class="block text-900 font-medium text-xl mb-2">Date de rendu</label>
-                <p-dropdown [options]="authors" [(ngModel)]="selectedAutor" optionLabel="student" filterBy="name" [showClear]="true" placeholder="Selectionner l'eleve"></p-dropdown>
-              </div>
-              <div class="field">
-                <label for="comment" class="block text-900 font-medium text-xl mb-2">Commentaire</label>
-                <textarea id="comment" pInputTextarea required rows="3" cols="20" [autoResize]="true" style="width: 30vw; height: 30vh;"></textarea>
-              </div>
-            </div>
-          </div>
-          <div class=" card text-center mb-4">
-            <div class="mb-3 text-center">
-              <button pButton>Ajouter le devoir</button>
-            </div>
-          </div>
-        </div>
-      </div>
+<!--            <p-divider layout="vertical">-->
+<!--              <b>Et</b>-->
+<!--            </p-divider>-->
+<!--            <div>-->
+<!--              <div class="mb-4">-->
+<!--                <h4>Informations sur l'enseignement</h4>-->
+<!--              </div>-->
+<!--              <p-divider></p-divider>-->
+<!--              <div class="mb-4">-->
+<!--                <label for="Name" class="block text-900 text-xl font-medium mb-2">Nom du devoir</label>-->
+<!--                <input id="Name" type="text" placeholder="Nom du devoir" pInputText class="w-full md:w-30rem" style="padding:1rem" [(ngModel)]="email" name="email">-->
+<!--              </div>-->
+<!--              <div class="mb-4">-->
+<!--                <label  class="block text-900 font-medium text-xl mb-2">Date de rendu</label>-->
+<!--                <p-calendar inputId="calendar" class="w-full md:w-30rem mb-3" [showIcon]="true" placeholder="Date de rendu"></p-calendar>-->
+<!--              </div>-->
+<!--              <div class="mb-4">-->
+<!--                <label  class="block text-900 font-medium text-xl mb-2">Date de rendu</label>-->
+<!--                <p-dropdown [options]="authors" [(ngModel)]="selectedAutor" optionLabel="student" filterBy="name" [showClear]="true" placeholder="Selectionner l'eleve"></p-dropdown>-->
+<!--              </div>-->
+<!--              <div class="field">-->
+<!--                <label for="comment" class="block text-900 font-medium text-xl mb-2">Commentaire</label>-->
+<!--                <textarea id="comment" pInputTextarea required rows="3" cols="20" [autoResize]="true" style="width: 30vw; height: 30vh;"></textarea>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class=" card text-center mb-4">-->
+<!--            <div class="mb-3 text-center">-->
+<!--              <button pButton pRipple icon="pi pi-plus" class="p-button-text" label="Ajouter le devoir" (click)="addAssignment()"></button>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--</p-dialog>-->
+<p-dialog header="Formulaire d'ajout d'un devoir" [(visible)]="displayModalAdd" [modal]="true" [style]="{width: '50rem'}" (onHide)="navigateToManage()">
+  <div class="content-section implementation">
+    <div class="card">
+      <p-toast></p-toast>
+      <p-steps [model]="items" [readonly]="true"></p-steps>
+    </div>
+    <router-outlet></router-outlet>
   </div>
-</div>
-
+</p-dialog>
 

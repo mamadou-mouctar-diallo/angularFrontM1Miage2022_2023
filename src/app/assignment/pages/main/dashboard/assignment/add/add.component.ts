@@ -1,5 +1,7 @@
-import {Component} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {Assignment} from "../../../../../models/assignment";
+import {MessageService} from "primeng/api";
+import {Router} from "@angular/router";
 
 
 
@@ -12,10 +14,13 @@ export interface formAssignment {
 
 @Component({
   selector: 'app-addAssignment',
-  templateUrl: './add.component.html'
+  templateUrl: './add.component.html',
+  providers: [MessageService]
 })
-export class AddComponent {
-
+export class AddComponent implements OnInit{
+  formSize: number = 0;
+  email: any;
+  password: any;
   formAssignmentA: formAssignment = {
     styleClasse: '',
     visible: true
@@ -29,12 +34,32 @@ export class AddComponent {
     visible: false
   };
 
-  formSize: number = 0;
-  email: any;
-  password: any;
   forms: formAssignment[] = [this.formAssignmentA, this.formAssignmentB, this.formAssignmentC]
   authors: any;
   selectedAutor: any;
+  items: any;
+  visible: boolean = true;
+  displayModalAdd: boolean = true;
+constructor(private messageService: MessageService, private route: Router) {
+}
+  ngOnInit(): void {
+    this.items = [{
+      label: 'Devoir',
+      routerLink: 'assignment'
+    },
+      {
+        label: 'Enseignement',
+        routerLink: 'course'
+      },
+      {
+        label: 'Eleve',
+        routerLink: 'student'
+      },
+    ];
+  }
+
+
+
   nextForm(): void{
     if(this.formSize <= 3){
       if(this.formSize === 0){
@@ -55,5 +80,13 @@ export class AddComponent {
       i++;
     }
     return forms.split('.');
+  }
+
+  addAssignment() {
+
+  }
+
+  navigateToManage() {
+    this.route.navigate(['assignments'])
   }
 }

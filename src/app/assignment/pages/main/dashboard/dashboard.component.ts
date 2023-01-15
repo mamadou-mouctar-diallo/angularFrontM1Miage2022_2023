@@ -34,7 +34,6 @@ export class DashboardComponent implements OnInit{
     this.assignmentService.getAssignments().subscribe(assignments =>{
       this.assignments = assignments;
     });
-    this.assignmentService.getAssignmentsLocal().subscribe(assignments => this.assignmentLocal = assignments);
     this.stateAssignement = {
       onTime: "Devoir en cours",
       rendered: "Devoir rendu",

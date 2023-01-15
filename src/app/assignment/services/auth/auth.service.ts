@@ -6,6 +6,7 @@ import {Observable} from "rxjs";
 import {URL} from "../../utils/utils";
 import jwt_decode from 'jwt-decode';
 import {ProtectService} from "../protect.service";
+import {an} from "chart.js/dist/chunks/helpers.core";
 
 @Injectable({
   providedIn: 'root',
@@ -13,47 +14,34 @@ import {ProtectService} from "../protect.service";
 export class AuthService {
 
   displayModalAuthorization: boolean = false;
-
   constructor(private router: Router, private http: HttpClient, private protectService: ProtectService) {
-  }
 
-  isUserLogged(): boolean {
-    return localStorage.getItem('token') != null;
   }
   makeSession(obj: any): Observable<any>{
    return  this.http.post<any>(URL+"/users/login", obj);
   }
   public sessionDistory(){
-   if(this.isTokenExpired()){
-     localStorage.clear();
-     this.router.navigate(['connect']);
-   }
+    const decodeToken: any = this.decodeTheToken(this.getToken());
+    if(decodeToken !== null){
+      setTimeout(() => {
+        localStorage.clear();
+        this.router.navigate(['connect']).then(res => console.log(res));
+      }, decodeToken.exp);
+    }
+  }
+
+  isUserLogged(): boolean {
+    return localStorage.getItem('token') != null;
   }
 
   isUserAdmin(user: User): boolean {
-    return user.role?.trim() == "admin";
-  }
-  isUserAuthorized(): boolean{
-    let token = this.getToken();
-    const decodeToken: any = this.decodeTheToken(token);
-    console.log(decodeToken.exp)
-    if(decodeToken !== null){
-      return decodeToken.role === "admin";
-    }
-    return false;
+    return user.role?.trim().toLowerCase() == "admin";
   }
 
-  private isTokenExpired(): boolean{
-    const token: any = this.decodeTheToken(this.getToken());
-    if(token === null) return false;
-    // return Math.floor((new Date).getTime()/60000) >= Math.floor(token.exp/60);
-    return false;
-  }
-
-  getToken(): string{
+  public getToken(): string{
     return localStorage.getItem('token') || 'vide';
   }
-  decodeTheToken(token: string){
+  private decodeTheToken(token: string){
     try {
       return jwt_decode(token);
     }catch (err) {

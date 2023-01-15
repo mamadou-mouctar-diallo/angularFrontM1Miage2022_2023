@@ -23,7 +23,6 @@ export class UpdateComponent implements OnInit{
   ngOnInit(): void {
     this.assignmentToEdit = this.assignmentService.configAssignmentToEdit.assignment;
     this.modalDisplayed = this.assignmentService.configAssignmentToEdit.modalOpened;
-    this.authService.sessionDistory();
   }
 
   saveEdit() {

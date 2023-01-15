@@ -3,6 +3,7 @@ import {Assignment} from "../../../../../models/assignment";
 import {AssignmentService} from "../../../../../services/assignment/assignment.service";
 import {AuthService} from "../../../../../services/auth/auth.service";
 import {Table} from "primeng/table";
+import {Router} from "@angular/router";
 
 @Component({
   selector: "app-manage",
@@ -13,9 +14,10 @@ export class ManageComponent {
   assignments!: Assignment[];
   finishToDelete: boolean = false;
   finishToEdit: boolean = false;
-  constructor(public assignmentService: AssignmentService, public authService: AuthService) {
+  constructor(public assignmentService: AssignmentService, public authService: AuthService, private route: Router) {
     this.assignmentService.initConfigAssignmentToEdit();
     this.assignmentService.initConfigAssignmentToDelete();
+    this.assignmentService.initConfigAssignmentToAdd();
   }
 
   onGlobalFilter(dt: Table, assignmentName: Event) {
@@ -29,7 +31,7 @@ export class ManageComponent {
   deleteAssignment(assignment: Assignment) {
     this.assignmentService.setConfigAssignmentToDelete({modalOpened: true, assignment: assignment}).subscribe(next =>{
       if(this.finishToDelete){
-        // this.ngOnInit();
+        this.ngOnInit();
       }
     })
   }
@@ -38,8 +40,14 @@ export class ManageComponent {
   editAssignment(assignment: Assignment) {
     this.assignmentService.setConfigAssignmentToEdit({modalOpened: true, assignment: assignment}).subscribe(next => {
       if(this.finishToEdit){
-        // this.ngOnInit();
+        this.ngOnInit();
       }
     })
+  }
+
+  showAddAssignment() {
+    // this.assignmentService.setConfigAssignmentToAdd({modalOpened: true, assignment: {}})
+    console.log("clicked add")
+    this.route.navigate(['add'])
   }
 }
