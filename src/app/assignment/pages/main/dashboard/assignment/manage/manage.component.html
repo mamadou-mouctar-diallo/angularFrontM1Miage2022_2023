@@ -36,8 +36,8 @@
             </td>
             <td>
               <div class="flex">
-                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editAssignment(assignment)"></button>
-                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteAssignment(assignment)"></button>
+                <button pButton pRipple pTooltip="Modifier ce devoir" icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editAssignment(assignment)"></button>
+                <button pButton pRipple pTooltip="Supprimer ce devoir" icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteAssignment(assignment)"></button>
               </div>
             </td>
           </tr>
@@ -49,4 +49,3 @@
 
 <app-update *ngIf="assignmentService.configAssignmentToEdit.modalOpened" (finishToEdit)="finishToEdit"></app-update>
 <app-delete *ngIf="assignmentService.configAssignmentToDelete.modalOpened" (finishToDelete)="finishToDelete"></app-delete>
-<app-addAssignment *ngIf="assignmentService.configAssignmentToAdd.modalOpened"></app-addAssignment>

@@ -34,9 +34,9 @@ export class DeleteComponent implements OnInit{
         this.displayModalDeletion = true;
         this.message = data.msg;
       }
-
+      this.modalDisplayed = false;
+      this.assignmentService.initConfigAssignmentToDelete();
     })
-    this.modalDisplayed = false;
 
   }
   cancelDelete(){

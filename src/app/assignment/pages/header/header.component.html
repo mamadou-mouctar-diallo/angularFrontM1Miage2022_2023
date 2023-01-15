@@ -24,12 +24,12 @@
       <i class="pi pi-envelope"></i>
       <span>Messages</span>
     </button>
-    <button pButton pRipple class="p-button-text" (click)="this.loginService.isUserLogged()? profile(): logIn()"
+    <button pButton pRipple pTooltip="{{this.loginService.isUserLogged() ? 'Votre profile': 'Vous connecter'}}" class="p-button-text" (click)="this.loginService.isUserLogged()? profile(): logIn()"
             icon="pi {{this.loginService.isUserLogged() ? 'pi-user' : 'pi-unlock'}}"
     label="{{this.loginService.isUserLogged() ? 'Profile' : 'Connexion'}}">
     </button>
     <p-divider *ngIf="this.configService.isMobile() && this.authService.isUserLogged()"></p-divider>
-    <button *ngIf="this.loginService.isUserLogged()" class="p-link layout-topbar-button" (click)="logOut()">
+    <button pTooltip="Vous deconnecter" *ngIf="this.loginService.isUserLogged()" class="p-link layout-topbar-button" (click)="logOut()">
       <i class="pi pi-fw pi-power-off red"></i>
       <span>Deconnexion</span>
     </button>

@@ -35,8 +35,9 @@ export class UpdateComponent implements OnInit{
         this.displayModalModification = true;
         this.message = data.msg;
       }
+      this.modalDisplayed = false;
+      this.assignmentService.initConfigAssignmentToAdd();
     })
-    this.modalDisplayed = false;
 
   }
   cancelEdit(){
