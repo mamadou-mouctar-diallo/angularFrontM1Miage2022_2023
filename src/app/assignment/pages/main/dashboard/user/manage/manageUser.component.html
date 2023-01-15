@@ -149,7 +149,7 @@
   </ng-template>
 </p-dialog>
 
-<p-dialog [(visible)]="displayModalNotification" header="Modification" [modal]="true" [closable]="false" [style]="{width:'450px'}" [closable]="false">
+<p-dialog [(visible)]="displayModalNotification" header="{{actionPop}}" [modal]="true" [closable]="false" [style]="{width:'450px'}" [closable]="false">
   <div class="flex align-items-center justify-content-center">
     <i class="pi pi-check mr-3 green" style="font-size: 2rem"></i>
     <span *ngIf="message" class="green">{{message}}</span>

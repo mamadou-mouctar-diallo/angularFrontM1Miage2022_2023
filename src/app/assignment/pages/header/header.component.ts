@@ -53,6 +53,7 @@ export class HeaderComponent implements OnInit{
 
   profile() {
     this.ngOnInit();
+    console.log("altual user name: "+this.actualUser.name);
     if(this.actualUser!==null || this.actualUser!==undefined){
       this.displayUserInformationModal=true;
     }

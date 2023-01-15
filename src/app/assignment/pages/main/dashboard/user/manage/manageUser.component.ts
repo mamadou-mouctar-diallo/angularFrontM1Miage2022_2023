@@ -27,6 +27,7 @@ export class ManageUserComponent implements OnInit{
   role?: string;
   action?:string;
   editedPassword?:string;
+  actionPop!:string;
   addUserString="Ajouter un Utilisateur";
   @ViewChild('dt') dt!: Table;
   constructor(public userService: UserService,private authService: AuthService, public formService: FormService) {
@@ -70,7 +71,8 @@ export class ManageUserComponent implements OnInit{
       };
       this.userService.add(user).subscribe(user=>{
         console.log(user)
-        this.message="L'Utilisateur a été ajouté avec success";
+        this.message=user.msg
+        this.actionPop="Ajout Utilisateur";
         this.displayModalNotification=true;
         this.ngOnInit();
       });
@@ -87,7 +89,8 @@ export class ManageUserComponent implements OnInit{
   }
   confirmDeleteUser() {
     this.userService.deleteUser(this.userToDelete._id).subscribe(msg =>{
-      this.message="L'Utilisateur a été supprimé avec success";
+      this.actionPop="Suppression Utilisateur"
+      this.message=msg.msg//"L'Utilisateur a été supprimé avec success";
       this.displayModalNotification=true;
       this.ngOnInit();
       console.log(msg)
@@ -127,7 +130,8 @@ export class ManageUserComponent implements OnInit{
       }
       this.userToEdit._id=this.delUser._id;
       this.userService.updateUser(this.userToEdit).subscribe(user=>{
-        this.message="L'Utilisateur a été modifié avec success";
+        this.actionPop="Modification Utilisateur";
+        this.message= user.msg;//"L'Utilisateur a été modifié avec success";
         this.displayModalNotification=true;
         console.log(user);
         this.ngOnInit();
