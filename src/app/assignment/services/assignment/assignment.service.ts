@@ -47,8 +47,8 @@ export class AssignmentService implements OnInit{
   upDateAssignment(assignment: any): Observable<any>{
     return this.http.put<any>(URL+this.prefix+'/update/'+assignment._id, assignment);
   };
-  addAssignment(assignment : Assignment): Observable<String> {
-     return this.http.post<String>(URL+this.prefix+'/add', assignment);
+  addAssignment(assignment : Assignment): Observable<any> {
+     return this.http.post<any>(URL+this.prefix+'/add', assignment);
   }
 
   deleteAssignment(id: any): Observable<any>{

@@ -71,3 +71,13 @@
 
 <app-update *ngIf="assignmentService.configAssignmentToEdit.modalOpened" (finishToEdit)="finishToEdit"></app-update>
 <app-delete *ngIf="assignmentService.configAssignmentToDelete.modalOpened" (finishToDelete)="finishToDelete"></app-delete>
+
+<p-dialog [(visible)]="this.formService.isAddedAssignment " header="Modification" [modal]="true" [style]="{width:'450px'}" [closable]="false">
+  <div class="flex align-items-center justify-content-center">
+    <i class="pi pi-check mr-3 green" style="font-size: 2rem"></i>
+    <span *ngIf="this.formService.messageAdd" class="green">{{this.formService.messageAdd}}</span>
+  </div>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple icon="pi pi-check" class="p-button-text" label="D'accord" (click)="closeModalAdd()"></button>
+  </ng-template>
+</p-dialog>

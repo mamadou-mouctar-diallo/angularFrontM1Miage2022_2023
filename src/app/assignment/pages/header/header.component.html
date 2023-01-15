@@ -16,14 +16,6 @@
   </button>
 
   <div #topbarmenu class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active': this.configService.state.profileSidebarVisible}" >
-    <button *ngIf="this.loginService.isUserLogged()" class="p-link layout-topbar-button" >
-      <i class="pi pi-bell"></i>
-      <span>Notifications</span>
-    </button>
-    <button *ngIf="this.loginService.isUserLogged()" class="p-link layout-topbar-button">
-      <i class="pi pi-envelope"></i>
-      <span>Messages</span>
-    </button>
     <button pButton pRipple pTooltip="{{this.loginService.isUserLogged() ? 'Votre profile': 'Vous connecter'}}" class="p-button-text" (click)="this.loginService.isUserLogged()? profile(): logIn()"
             icon="pi {{this.loginService.isUserLogged() ? 'pi-user' : 'pi-unlock'}}"
     label="{{this.loginService.isUserLogged() ? 'Profile' : 'Connexion'}}">

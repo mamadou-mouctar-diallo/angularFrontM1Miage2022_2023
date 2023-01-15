@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit, AfterViewInit{
   private assignments?: Assignment[];
   @ViewChild('toast')toast!: any;
   displayModalLogin: boolean = false;
+  displayModalPassword: boolean = false;
   constructor(private authService: AuthService, private assignmentService: AssignmentService, private route: Router) {
   }
 
@@ -37,8 +38,8 @@ export class LoginComponent implements OnInit, AfterViewInit{
     });
   }
 
-  onForgetPasswordClick() {
-
+  onForgetPassword() {
+    this.displayModalPassword = true;
   }
 
   change() {
@@ -61,5 +62,9 @@ export class LoginComponent implements OnInit, AfterViewInit{
 
   closeModalLogin() {
     this.displayModalLogin = false;
+  }
+
+  closeModalPassword() {
+    this.displayModalPassword = false;
   }
 }

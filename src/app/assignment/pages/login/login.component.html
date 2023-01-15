@@ -17,10 +17,10 @@
 
           <div class="flex align-items-center justify-content-between mb-5 gap-5">
             <div class="flex align-items-center">
-              <p-checkbox inputId="remembered" id="remembered" [binary]="true" styleClass="mr-2" name="remembered" [(ngModel)]="remembered" (onChange)="change()"></p-checkbox>
+              <p-checkbox inputId="remembered" id="remembered" [binary]="true" styleClass="mr-2" name="remembered" [(ngModel)]="remembered"></p-checkbox>
               <label for="remembered">Se rappeler de moi</label>
             </div>
-            <a class="font-medium no-underline ml-2 text-right cursor-pointer" style="color: var(--primary-color)" (click)="onForgetPasswordClick()">Mot de passe oublié</a>
+            <a class="font-medium no-underline ml-2 text-right cursor-pointer" style="color: var(--primary-color)" (click)="onForgetPassword()">Mot de passe oublié</a>
           </div>
           <button pButton pRipple label="Sign In" class="w-full p-3 text-xl" (click)="onSubmit()"></button>
         </div>
@@ -36,5 +36,15 @@
   </div>
   <ng-template pTemplate="footer">
     <button pButton pRipple icon="pi pi-check" class="p-button-text" label="D'accord" (click)="closeModalLogin()"></button>
+  </ng-template>
+</p-dialog>
+
+<p-dialog [(visible)]="displayModalPassword" header="Mot de passe oublié" [modal]="true" [style]="{width:'450px'}" [closable]="false">
+  <div class="flex align-items-center justify-content-center">
+    <i class="pi pi-exclamation-triangle mr-3 red" style="font-size: 2rem"></i>
+    <span class="red">Veuillez vous rapprocher de l'administrateur</span>
+  </div>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple icon="pi pi-check" class="p-button-text" label="D'accord" (click)="closeModalPassword()"></button>
   </ng-template>
 </p-dialog>

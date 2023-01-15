@@ -1,7 +1,10 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, Injectable, OnInit} from "@angular/core";
 import {Assignment} from "../../../../../models/assignment";
 import {MessageService} from "primeng/api";
 import {Router} from "@angular/router";
+import {HttpClient} from "@angular/common/http";
+import {AssignmentService} from "../../../../../services/assignment/assignment.service";
+import {FormService} from "../../../../../services/form.service";
 
 
 
@@ -17,6 +20,7 @@ export interface formAssignment {
   templateUrl: './add.component.html',
   providers: [MessageService]
 })
+@Injectable()
 export class AddComponent implements OnInit{
   formSize: number = 0;
   email: any;
@@ -40,7 +44,7 @@ export class AddComponent implements OnInit{
   items: any;
   visible: boolean = true;
   displayModalAdd: boolean = true;
-constructor(private messageService: MessageService, private route: Router) {
+constructor(private formService: FormService, private route: Router, private assignmentService: AssignmentService) {
 }
   ngOnInit(): void {
     this.items = [{
@@ -58,32 +62,15 @@ constructor(private messageService: MessageService, private route: Router) {
     ];
   }
 
-
-
-  nextForm(): void{
-    if(this.formSize <= 3){
-      if(this.formSize === 0){
-        this.forms[0].styleClasse = "display: none;";
-        this.formSize = this.formSize + 1;
-      }
-    };
-  }
-  previousForm(): void{
-    if(this.formSize > 0)this.formSize = this.formSize - 1;
-    if(this.formSize === 0)this.forms[0].styleClasse = "display: grid;";
-  }
-  getForms(): string[]{
-    let i = 2
-    let forms: string = '1';
-    while ( i <= this.formSize){
-      forms += forms+'.'+i;
-      i++;
-    }
-    return forms.split('.');
-  }
-
   addAssignment() {
-
+  console.log(this.formService.assignmentToAdd)
+  this.assignmentService.addAssignment(this.formService.assignmentToAdd).subscribe(data => {
+    if(data.msg){
+      this.formService.messageAdd = data.msg;
+      this.formService.isAddedAssignment = true;
+    }
+    this.navigateToManage();
+  })
   }
 
   navigateToManage() {

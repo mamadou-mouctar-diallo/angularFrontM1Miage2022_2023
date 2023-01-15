@@ -81,6 +81,7 @@ export class DashboardComponent implements OnInit{
   }
 
   showModalDialog(assigment: Assignment): void {
+    console.log(assigment.course)
     this.selectedAssignment = assigment;
     this.displayModal = true;
   }

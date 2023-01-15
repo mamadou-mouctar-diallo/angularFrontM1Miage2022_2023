@@ -28,7 +28,7 @@ export class SidbebarComponent implements OnInit{
       {
         label: 'Devoirs',
         item: {
-            label: 'Manage assignments',
+            label: 'Gestion devoirs',
             icon: 'pi pi-folder-open',
             routerLink: ['/assignments']
           }
@@ -36,7 +36,7 @@ export class SidbebarComponent implements OnInit{
       {
         label: 'utilisateurs',
         item: {
-          label: 'Manage users',
+          label: 'Gestions Utilisateurs',
           icon: 'pi pi-folder-open',
           routerLink: ['/users'],
         }

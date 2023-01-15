@@ -56,4 +56,8 @@ export class ManageComponent {
   totalAssignments(): number {
     return this.assignments !== undefined ? this.assignments.length : 0;
   }
+
+  closeModalAdd() {
+    this.formService.isAddedAssignment = false;
+  }
 }

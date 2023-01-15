@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Base de données",
+    "teacherPhoto": "prof1.png",
+    "coursePhoto": "base_donnees.png"
+  },
+  {
+    "name": "Technologies Web",
+    "teacherPhoto": "prof2.png",
+    "coursePhoto": "web.png"
+  },
+  {
+    "name": "Grails",
+    "teacherPhoto": "prof3.png",
+    "coursePhoto": "grails.png"
+  },
+  {
+    "name": "Math Big Data",
+    "teacherPhoto": "prof4.png",
+    "coursePhoto": "math_big_data.png"
+  },
+  {
+    "name": "Intelligence Artificielle",
+    "teacherPhoto": "prof5.png",
+    "coursePhoto": "intelligence_artificielle.png"
+  },
+  {
+    "name": "Algebre",
+    "teacherPhoto": "prof6.png",
+    "coursePhoto": "algebre.png"
+  },
+  {
+    "name": "Gestion Financiere",
+    "teacherPhoto": "prof7.png",
+    "coursePhoto": "gestion_financiere.png"
+  }
+]

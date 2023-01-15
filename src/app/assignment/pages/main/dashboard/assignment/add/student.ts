@@ -3,6 +3,7 @@ import {a, an} from "chart.js/dist/chunks/helpers.core";
 import {Router} from "@angular/router";
 import {FormService} from "../../../../../services/form.service";
 import {UtilService} from "../../../../../services/util.service";
+import {AddComponent} from "./add.component";
 
 export interface Student {
   name: String,
@@ -37,7 +38,7 @@ export interface Student {
 export class Student implements OnInit{
   submitted: any | boolean;
   students!: Student[];
-  constructor(private route: Router, public formService: FormService,private utilService: UtilService) {
+  constructor(private route: Router, public formService: FormService,private utilService: UtilService,private addComponent: AddComponent) {
   }
 
   ngOnInit(): void {
@@ -48,11 +49,17 @@ export class Student implements OnInit{
     }
 
   nextPage() {
+    this.addComponent.addAssignment();
   }
   previousPage() {
   this.route.navigate(['add/course'])
   }
   setStudent(event: any){
     console.log(event.value);
+    this.formService.assignmentToAdd.author = event.value.name;
+  }
+
+  addAssignment() {
+
   }
 }
