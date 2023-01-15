@@ -134,6 +134,7 @@ export class ManageUserComponent implements OnInit{
         this.ngOnInit();
       })
       this.displayEditUserModal=false;
+      //Commit
     }
 
   }
