@@ -4,8 +4,7 @@
     <div  class="layout-menu-title">{{el.label.toUpperCase()}}</div>
     <div >
       <div class="routeLink">
-        <i class="{{el.item.icon}}"></i>
-        <span [routerLink]="el.item.routerLink">{{el.item.label}}</span>
+        <button pButton pRipple class="p-button-text p-button-secondary" icon="{{el.item.icon}}" [routerLink]="el.item.routerLink" label="{{el.item.label}}"></button>
       </div>
     </div>
 

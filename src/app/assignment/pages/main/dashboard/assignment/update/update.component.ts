@@ -36,7 +36,6 @@ export class UpdateComponent implements OnInit{
         this.message = data.msg;
       }
       this.modalDisplayed = false;
-      this.assignmentService.initConfigAssignmentToAdd();
     })
 
   }

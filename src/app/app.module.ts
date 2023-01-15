@@ -47,12 +47,14 @@ import {InputTextareaModule} from "primeng/inputtextarea";
 import {CalendarModule} from "primeng/calendar";
 import {StepsModule} from "primeng/steps";
 import {AddModule} from "./assignment/pages/main/dashboard/assignment/add/add.module";
+import {LoginGuard} from "./assignment/guards/login.guard";
+import {Authorization} from "./assignment/pages/main/authorization";
 
 const routes: Routes = [
   {path: '', component: DashboardComponent, pathMatch: 'full'},
   {path: 'connect', component: LoginComponent},
-  {path: 'assignments', component: ManageComponent},
-  {path: 'users', component: ManageUserComponent},
+  {path: 'assignments', component: ManageComponent, canActivate: [LoginGuard]},
+  {path: 'users', component: ManageUserComponent, canActivate: [LoginGuard]},
 ]
 
 
@@ -69,6 +71,7 @@ const routes: Routes = [
     UpdateComponent,
     LoaderComponent,
     ManageUserComponent,
+    Authorization,
   ],
     imports: [
         FormsModule,
@@ -104,7 +107,7 @@ const routes: Routes = [
         StepsModule,
         AddModule
     ],
-  providers: [AssignmentService, MessagesService,{
+  providers: [LoginGuard,AssignmentService, MessagesService,{
     provide: HTTP_INTERCEPTORS,
     useClass: NetworkInterceptor,
     multi: true

@@ -29,6 +29,7 @@ export class ConfigService {
     theme: 'lara-light-indigo',
     scale: 14,
   };
+  modalAutorization: boolean = false;
 
   openOverlay = new Subject<any>();
   configUpdate = new Subject<AppConfig>()

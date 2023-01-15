@@ -38,7 +38,7 @@ export class SidbebarComponent implements OnInit{
         item: {
           label: 'Manage users',
           icon: 'pi pi-folder-open',
-          routerLink: ['/users']
+          routerLink: ['/users'],
         }
       }
     ]
