@@ -55,15 +55,10 @@ export class Assignment implements OnInit{
   }
 
   nextPage() {
-    console.log(this.formService.assignmentToAdd)
-    console.log(this.formService.isValidfieldAssignment())
   this.route.navigate(['add/course'])
   }
 
   ngOnInit(): void {
-  }
-  isValidField(): boolean{
-    return this.name.empty() && this.deadLine.empty()
   }
 
 }

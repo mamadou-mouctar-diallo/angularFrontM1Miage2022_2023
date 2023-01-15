@@ -69,6 +69,19 @@ constructor(private formService: FormService, private route: Router, private ass
       this.formService.messageAdd = data.msg;
       this.formService.isAddedAssignment = true;
     }
+    this.formService.assignmentToAdd =  {
+      name: '',
+      deadLine: '',
+      rendered: false,
+      author: '',
+      course: {
+        name: '',
+        coursePhoto: '',
+        teacherPhoto: ''
+      },
+      mark: '',
+      comment: ''
+    };
     this.navigateToManage();
   })
   }

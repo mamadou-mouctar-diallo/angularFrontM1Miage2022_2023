@@ -55,11 +55,6 @@ export class Student implements OnInit{
   this.route.navigate(['add/course'])
   }
   setStudent(event: any){
-    console.log(event.value);
     this.formService.assignmentToAdd.author = event.value.name;
-  }
-
-  addAssignment() {
-
   }
 }

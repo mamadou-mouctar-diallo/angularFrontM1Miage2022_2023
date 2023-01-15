@@ -27,7 +27,6 @@ export class LoginComponent implements OnInit, AfterViewInit{
 
   onSubmit() {
     this.authService.makeSession({email: this.email, password: this.password}).subscribe(data => {
-      console.log(data)
      if(data.msg.startsWith('bearer')){
        localStorage.setItem('token', data.msg);
        this.route.navigate(['']).then(err => console.log(err))
@@ -42,23 +41,10 @@ export class LoginComponent implements OnInit, AfterViewInit{
     this.displayModalPassword = true;
   }
 
-  change() {
-    this.remembered = !this.remembered
-    console.log(this.remembered)
-  }
-
   ngOnInit(): void {
     this.assignmentService.getAssignments().subscribe(assignments => this.assignments = assignments)
-    this.change();
   }
 
-  onConfirm() {
-    this.toast.messageService.clear('c')
-  }
-
-  onReject() {
-    this.toast.messageService.clear('c')
-  }
 
   closeModalLogin() {
     this.displayModalLogin = false;

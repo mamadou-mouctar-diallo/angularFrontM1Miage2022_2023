@@ -3,7 +3,6 @@ import {AuthService} from "../../services/auth/auth.service";
 import {Router} from "@angular/router";
 import {Sidebar} from "primeng/sidebar";
 import {ConfigService} from "../../services/config.service";
-import {User} from "../../models/user";
 import {UserService} from "../../services/user/user.service";
 
 @Component({
@@ -46,8 +45,7 @@ export class HeaderComponent implements OnInit{
         if(user.id == this.actualUser.id){
           this.actualUser.name=user.name;
           this.actualUser.email=user.email;
-          this.actualUser.password=user.password;
-          console.log(this.actualUser);
+          this.actualUser.password=user.password
         }
       }
     })
@@ -55,9 +53,6 @@ export class HeaderComponent implements OnInit{
 
   profile() {
     this.ngOnInit();
-    console.log(this.actualUser._id);
-    console.log(this.actualUser);
-    console.log(this.actualUser.password);
     if(this.actualUser!==null || this.actualUser!==undefined){
       this.displayUserInformationModal=true;
     }
@@ -72,15 +67,10 @@ export class HeaderComponent implements OnInit{
       role:this.actualUser?.role
     };
   }
-  checkPassWord(){
-
-  }
   confirmEditUser(){
     this.userService.getAll().subscribe(users => {
       for (const user of users){
         if(user.id===this.actualUserToEdit.id){
-          console.log("ancien user:")
-          console.log(user);
           user.email=this.actualUserToEdit.email;
           user.name=this.actualUserToEdit.name;
 
@@ -88,10 +78,7 @@ export class HeaderComponent implements OnInit{
             user.password=this.ancienPassword;
           }
 
-          console.log("We are editing the user profile:")
-          console.log(user);
           this.userService.updateUser(user).subscribe(user=>{
-            console.log(user);
             this.profile();
           });
         }

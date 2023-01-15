@@ -51,7 +51,6 @@ export class Course implements OnInit{
   ngOnInit(): void {
     this.utilService.getLocalCourses().subscribe(courses =>{
       this.courses = courses
-      console.log(courses)
     });
   }
 
