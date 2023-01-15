@@ -38,7 +38,7 @@
 
 <!--Boite de dialogue pour la visualisation des infos de l'utilisateur-->
 <p-dialog header="Informations de l'Utilisateur" [(visible)]="displayUserInformationModal" [modal]="true" [style]="{width: '40vw'}" class="p-fluid"
-          [draggable]="false" [resizable]="false">
+          [draggable]="false" [resizable]="false" [closable]="false">
   <ng-template pTemplate="body">
     <p-divider></p-divider>
     <h5 class="m-0 flex">
@@ -71,18 +71,13 @@
 
 <!--Boite de dialogue pour la modification de l'utilisateur-->
 <p-dialog header="Modification de l'Utilisateur" [(visible)]="displayEditUserInformationModal" [modal]="true" [style]="{width: '40vw'}" class="p-fluid"
-          [draggable]="false" [resizable]="false">
+          [draggable]="false" [resizable]="false" [closable]="false">
   <ng-template pTemplate="body">
     <p-divider></p-divider>
     <h5 class="m-0">
       <i class="pi pi-user-edit" style="font-size: 2rem">  Modifier mes informations</i>
     </h5>
     <div class=" card  mt-2">
-
-<!--      <div class="field">-->
-<!--        <label for="ancienPassword">Ancien mot de passe: </label>-->
-<!--        <p-password [(ngModel)]="ancienPassword" id="ancienPassword" name="ancienPassword" [toggleMask] ="true"></p-password>-->
-<!--      </div>-->
       <div class="field">
         <label for="newPassword">Nouveau mot de passe: </label>
         <p-password [(ngModel)]="ancienPassword" id="newPassword" name="newPassword" [toggleMask] ="true"></p-password>

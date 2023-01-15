@@ -104,7 +104,6 @@ export class ManageUserComponent implements OnInit{
       || this.email.replaceAll(' ', '') == ''
       || this.password.replaceAll(' ', '') == ''
       || this.password?.search(' ') != -1;
-
   }
 
   totalUsers():number{
@@ -136,13 +135,11 @@ export class ManageUserComponent implements OnInit{
       this.displayEditUserModal=false;
       //Commit
     }
-
   }
   isDisableEditUserForm():boolean{
     return this.userToEdit.name == null || this.userToEdit.email == null
       || this.userToEdit.role == null
       || this.userToEdit.name.replaceAll(' ', '') == ''
       || this.userToEdit.email.replaceAll(' ', '') == '';
-
   }
 }

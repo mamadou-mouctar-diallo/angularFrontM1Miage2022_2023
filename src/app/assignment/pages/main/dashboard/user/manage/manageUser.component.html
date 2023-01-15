@@ -68,10 +68,8 @@
     </div>
   </div>
 </div>
-
-<!--Boite de dialogue pour l'ajout d'un utilisateur-->
 <p-dialog header="Ajout d'un nouvel utilisateur" [(visible)]="displayAddUserModal" [modal]="true" [style]="{width: '50vw'}" class="p-fluid"
-          [draggable]="false" [resizable]="false">
+          [draggable]="false" [resizable]="false" [closable]="false">
   <ng-template pTemplate="body">
     <p-divider></p-divider>
     <h5 class="m-0">Informations de l'utilisateur</h5>
@@ -107,7 +105,7 @@
 
 <!--Boite de dialogue pour la modification d'un utilisateur-->
 <p-dialog header="Modification de l'Utilisateur" [(visible)]="displayEditUserModal" [modal]="true" [style]="{width: '50vw'}" class="p-fluid"
-          [draggable]="false" [resizable]="false">
+          [draggable]="false" [resizable]="false" [closable]="false">
   <ng-template pTemplate="body">
     <p-divider></p-divider>
     <h5 class="m-0">Informations de l'utilisateur</h5>
@@ -139,9 +137,8 @@
   </ng-template>
 </p-dialog>
 
-
 <!--Boite de dialogue pour la suppression d'un utilisateur-->
-<p-dialog [(visible)]="displayDeleteUserModal" header="Confirmation" [modal]="true" [style]="{width:'450px'}">
+<p-dialog [(visible)]="displayDeleteUserModal" header="Confirmation" [modal]="true" [style]="{width:'450px'}" [closable]="false">
   <div class="flex align-items-center justify-content-center">
     <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
     <span *ngIf="userToDelete">confirmez-vous la suppression de l'utilisateur: <b> {{userToDelete.name}} </b>?</span>
@@ -152,7 +149,7 @@
   </ng-template>
 </p-dialog>
 
-<p-dialog [(visible)]="displayModalNotification" header="Modification" [modal]="true" [style]="{width:'450px'}" [closable]="false">
+<p-dialog [(visible)]="displayModalNotification" header="Modification" [modal]="true" [closable]="false" [style]="{width:'450px'}" [closable]="false">
   <div class="flex align-items-center justify-content-center">
     <i class="pi pi-check mr-3 green" style="font-size: 2rem"></i>
     <span *ngIf="message" class="green">{{message}}</span>
