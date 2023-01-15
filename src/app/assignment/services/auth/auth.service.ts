@@ -33,6 +33,22 @@ export class AuthService {
   isUserLogged(): boolean {
     return localStorage.getItem('token') != null;
   }
+  getActualUser():any{
+    let token=this.getToken();
+    const user: any = this.decodeTheToken(token);
+    if(user!==null){
+      return user;
+    }
+    else{
+      return undefined;
+    }
+  }
+  private isTokenExpired(): boolean{
+    const token: any = this.decodeTheToken(this.getToken());
+    if(token === null) return false;
+    // return Math.floor((new Date).getTime()/60000) >= Math.floor(token.exp/60);
+    return false;
+  }
 
   isUserAdmin(user: User): boolean {
     return user.role?.trim().toLowerCase() == "admin";

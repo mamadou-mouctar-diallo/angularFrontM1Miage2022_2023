@@ -35,3 +35,67 @@
     </button>
   </div>
 </div>
+
+<!--Boite de dialogue pour la visualisation des infos de l'utilisateur-->
+<p-dialog header="Informations de l'Utilisateur" [(visible)]="displayUserInformationModal" [modal]="true" [style]="{width: '50vw'}" class="p-fluid"
+          [draggable]="false" [resizable]="false">
+  <ng-template pTemplate="body">
+    <p-divider></p-divider>
+    <h5 class="m-0 flex">
+      <i class="pi pi-user" style="font-size: 2rem">  {{actualUser?.name}}</i>
+    </h5>
+    <div class=" card  mt-2">
+      <div class="flex justify-content-between">
+        <h6>Nom d'utilisateur:</h6>
+        <p>{{actualUser?.name}}</p>
+      </div>
+      <div class="flex justify-content-between">
+        <h6>Email de l'utilisateur:</h6>
+        <p>{{actualUser?.email}}</p>
+      </div>
+      <div class="flex justify-content-between">
+        <h6>Mot de passe:</h6>
+        <p>************</p>
+      </div>
+      <div class="flex justify-content-between">
+        <h6>Role de l'utilisateur:</h6>
+        <p>{{actualUser?.role}}</p>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check" label="OK" styleClass="p-button-text" (click)="displayUserInformationModal=false"></p-button>
+    <p-button icon="pi pi-user-edit" label="Edit" styleClass="p-button-text" (click)="editUserProfile()" ></p-button>
+  </ng-template>
+</p-dialog>
+
+<!--Boite de dialogue pour la modification de l'utilisateur-->
+<p-dialog header="Modification de l'Utilisateur" [(visible)]="displayEditUserInformationModal" [modal]="true" [style]="{width: '50vw'}" class="p-fluid"
+          [draggable]="false" [resizable]="false">
+  <ng-template pTemplate="body">
+    <p-divider></p-divider>
+    <h5 class="m-0">
+      <i class="pi pi-user-edit" style="font-size: 2rem">  Edit</i>
+    </h5>
+    <div class=" card  mt-2">
+      <div class="field">
+        <label for="name">Nom de l'utilisateur:</label>
+        <input type="text" pInputText [(ngModel)]="actualUserToEdit.name" id="name" name="name"/>
+        <small class="p-error block" *ngIf="actualUserToEdit.name==null || actualUserToEdit.name.replaceAll(' ','')==''">Name is required.</small>
+      </div>
+      <div class="field">
+        <label for="email">Email:</label>
+        <input type="text" pInputText [(ngModel)]="actualUserToEdit.email" id="email" name="email"/>
+        <small class="p-error block" *ngIf="actualUserToEdit.email==null || actualUserToEdit.email.replaceAll(' ','')==''">Email is required.</small>
+      </div>
+      <!--div class="field">
+        <label for="password">Nouveau mot de passe:</label>
+        <p-password [(ngModel)]="editedPassword"  id="editedPassword" name="password" [toggleMask] ="true"></p-password>
+      </div-->
+    </div>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="cancelEditUserModal()"></button>
+    <p-button icon="pi pi-check" label="Enregistrer" styleClass="p-button-text" (click)="confirmEditUser()"></p-button>
+  </ng-template>
+</p-dialog>

@@ -10,7 +10,7 @@
             </div>
             <span class="block mt-2 md:mt-0 p-input-icon-left">
                             <i class="pi pi-search"></i>
-                            <input pInputText type="text"  (input)="dt.filterGlobal(users,userName)" [(ngModel)]="userName" placeholder="Search User"  class="w-full sm:w-auto"/>
+                            <input pInputText type="text"  (input)="dt.filterGlobal($event.target, 'contains')" [(ngModel)]="userName" placeholder="Search User"  class="w-full sm:w-auto"/>
                         </span>
           </div>
         </ng-template>
@@ -21,7 +21,12 @@
             <th >role</th>
             <th></th>
             <th>Action</th>
-            <th><button pButton pRipple class="p-button-success" (click)="showAddUserModalDialog()" icon="pi pi-plus" label="Ajouter un utilisateur"></button></th>
+            <th></th>
+            <th>
+              <button pButton class="p-button-plain p-button-success" (click)="showAddUserModalDialog()">
+              <i class="pi pi-user-plus"> {{addUserString}} </i>
+            </button>
+            </th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-user>
@@ -44,6 +49,10 @@
             <td>
               <div class="flex">
                 <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" pTooltip = "Modifier cet Utilisateur" icon="pi pi-pencil" (click)="showEditUserModalDialog(user)" ></button>
+              </div>
+            </td>
+            <td>
+              <div class="flex">
                 <button  pButton pRipple pTooltip = "Supprimer cet Utilisateur" icon="pi pi-trash" class="p-button-rounded p-button-raised p-button-danger" (click)="deleteUser(user)"></button>
               </div>
             </td>

@@ -25,6 +25,7 @@ export class ManageUserComponent implements OnInit{
   role?: string;
   action?:string;
   editedPassword?:string;
+  addUserString="Ajouter un Utilisateur";
   constructor(public userService: UserService,private authService: AuthService) {
     this.stateOptions = [{label: 'Classic', value: 'Classic'}, {label: 'Admin', value: 'Admin'}];
   }

@@ -16,6 +16,10 @@ private prefix: string = "/users";
   getAll(): Observable<User[]> {
    return  this.http.get<User[]>(URL+this.prefix);
   }
+  getOne(){
+    //return  this.http.get<User>(URL+this.prefix);
+  }
+
   deleteUser(id: any): Observable<any>{
     return this.http.delete<any>(URL+this.prefix+'/delete/'+id);
   }
@@ -28,11 +32,11 @@ private prefix: string = "/users";
     return this.http.post<any>(URL+this.prefix+'/add', user);
   }
 
-  getOne(): any {
-  }
-
   updateUser(user:any): Observable<any> {
     return this.http.put<any>(URL+this.prefix+'/update/'+user._id, user);
+  }
+  updateUserById(user:any): Observable<any> {
+    return this.http.put<any>(URL+this.prefix+'/update/${user.id}', user);
   }
 
   ngOnInit(): void {
