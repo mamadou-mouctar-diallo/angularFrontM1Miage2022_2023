@@ -54,6 +54,6 @@ export class ManageComponent {
   }
 
   totalAssignments(): number {
-    return this.assignments.length;
+    return this.assignments !== undefined ? this.assignments.length : 0;
   }
 }
