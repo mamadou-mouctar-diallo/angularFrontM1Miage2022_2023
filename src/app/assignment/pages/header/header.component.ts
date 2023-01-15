@@ -14,23 +14,21 @@ import {UserService} from "../../services/user/user.service";
 export class HeaderComponent implements OnInit{
   @ViewChild('menubutton') menubutton!: ElementRef;
   @ViewChild('sidebar') sidebar!: Sidebar;
-  showDivider: boolean = false;
   constructor(public loginService: AuthService, private route: Router, public configService: ConfigService, public authService: AuthService, public userService:UserService) {
   }
 
-  opened: boolean = false;
   actualUser:any;
   displayUserInformationModal:boolean=false;
   displayEditUserInformationModal:boolean=false;
   actualUserToEdit!: any;
   allUsers!: User[];
   editUser!:any;
+  ancienPassword!:string |undefined;
 
   logIn() {
     if (!this.loginService.isUserLogged()) this.route.navigate(['connect'])
   }
   logOut(){
-    // this.loginService.sessionDistory();
     if (this.loginService.isUserLogged()){
       this.route.navigate(['connect'])
       localStorage.clear();
@@ -43,11 +41,22 @@ export class HeaderComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    //this.actualUserToEdit = this.userService.configUserToEdit.user;
+    this.ancienPassword=undefined;
+    this.actualUser=this.authService.getActualUser();
+    this.userService.getAll().subscribe(users => {
+      for (const user of users){
+        if(user.id == this.actualUser.id){
+          this.actualUser.name=user.name;
+          this.actualUser.email=user.email;
+          this.actualUser.password=user.password;
+          console.log(this.actualUser);
+        }
+      }
+    })
   }
 
   profile() {
-    this.actualUser=this.authService.getActualUser();
+    this.ngOnInit();
     console.log(this.actualUser._id);
     console.log(this.actualUser);
     console.log(this.actualUser.password);
@@ -56,9 +65,7 @@ export class HeaderComponent implements OnInit{
     }
   }
   editUserProfile(){
-    //this.displayUserInformationModal=false;
     this.displayEditUserInformationModal=true;
-    this.editUser=this.actualUser;
     this.actualUserToEdit = {
       id:this.actualUser?.id,
       name:this.actualUser?.name,
@@ -66,34 +73,31 @@ export class HeaderComponent implements OnInit{
       password:this.actualUser?.password,
       role:this.actualUser?.role
     };
-    // this.actualUserToEdit.id=this.actualUser?.id;
-    // this.actualUserToEdit.name=this.actualUser?.name;
-    // this.actualUserToEdit.email=this.actualUser?.email;
-    // this.actualUserToEdit.password=this.actualUser?.password;
-    // this.actualUserToEdit.role=this.actualUser?.role;
-    console.log(this.actualUser._id);
-    console.log(this.actualUserToEdit._id);
-    //this.actualUserToEdit= this.actualUser;
+  }
+  checkPassWord(){
+
   }
   confirmEditUser(){
     this.userService.getAll().subscribe(users => {
       for (const user of users){
         if(user.id===this.actualUserToEdit.id){
-          this.editUser=user;
-          //this.actualUserToEdit._id=this.editUser._id;
-          console.log(this.editUser._id);
-          console.log("user correspond à:")
+          console.log("ancien user:")
           console.log(user);
           user.email=this.actualUserToEdit.email;
           user.name=this.actualUserToEdit.name;
+
+          if(this.ancienPassword !== undefined && this.ancienPassword !== null){
+            user.password=this.ancienPassword;
+          }
+
           console.log("We are editing the user profile:")
           console.log(user);
           this.userService.updateUser(user).subscribe(user=>{
-            console.log(user)
+            console.log(user);
+            this.profile();
           });
         }
       }
-      this.allUsers = users;
     });
     this.displayUserInformationModal=true;
     this.displayEditUserInformationModal=false;

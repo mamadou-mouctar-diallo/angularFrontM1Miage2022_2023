@@ -79,10 +79,14 @@
     </h5>
     <div class=" card  mt-2">
 
-      <!--div class="field">
-        <label for="password">Nouveau mot de passe:</label>
-        <p-password [(ngModel)]="editedPassword"  id="editedPassword" name="password" [toggleMask] ="true"></p-password>
-      </div-->
+<!--      <div class="field">-->
+<!--        <label for="ancienPassword">Ancien mot de passe: </label>-->
+<!--        <p-password [(ngModel)]="ancienPassword" id="ancienPassword" name="ancienPassword" [toggleMask] ="true"></p-password>-->
+<!--      </div>-->
+      <div class="field">
+        <label for="newPassword">Nouveau mot de passe: </label>
+        <p-password [(ngModel)]="ancienPassword" id="newPassword" name="newPassword" [toggleMask] ="true"></p-password>
+      </div>
       <div class="field">
         <label for="name">Nom de l'utilisateur:</label>
         <input type="text" pInputText [(ngModel)]="actualUserToEdit.name" id="name" name="name"/>

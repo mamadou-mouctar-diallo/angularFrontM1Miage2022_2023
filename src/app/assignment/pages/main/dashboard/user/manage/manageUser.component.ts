@@ -20,6 +20,8 @@ export class ManageUserComponent implements OnInit{
   displayAddUserModal: boolean = false;
   displayDeleteUserModal: boolean = false;
   displayEditUserModal:boolean = false;
+  displayModalNotification:boolean=false;
+  message!:string;
   name?: string;
   email?: string;
   password?: string;
@@ -47,7 +49,6 @@ export class ManageUserComponent implements OnInit{
   showEditUserModalDialog(user:User){
     this.action='editing';
     console.log("editing: ")
-    //let decipher = CryptoJS.AES.decrypt(user.password, "CIPHERKEY").toString(CryptoJS.enc.Utf8);
     console.log(user)
     this.userToEdit = {
       id:user.id,
@@ -70,19 +71,25 @@ export class ManageUserComponent implements OnInit{
       };
       this.userService.add(user).subscribe(user=>{
         console.log(user)
+        this.message="L'Utilisateur a été ajouté avec success";
+        this.displayModalNotification=true;
         this.ngOnInit();
       });
       this.displayAddUserModal = false;
     }
   }
+  closeModalModification(){
+    this.displayModalNotification=false;
+  }
   deleteUser(user:User){
     console.log(user)
     this.userToDelete = user;
     this.displayDeleteUserModal = true;
-    //this.userService.delete(user)
   }
   confirmDeleteUser() {
     this.userService.deleteUser(this.userToDelete._id).subscribe(msg =>{
+      this.message="L'Utilisateur a été supprimé avec success";
+      this.displayModalNotification=true;
       this.ngOnInit();
       console.log(msg)
     } )
@@ -122,6 +129,8 @@ export class ManageUserComponent implements OnInit{
       }
       this.userToEdit._id=this.delUser._id;
       this.userService.updateUser(this.userToEdit).subscribe(user=>{
+        this.message="L'Utilisateur a été modifié avec success";
+        this.displayModalNotification=true;
         console.log(user);
         this.ngOnInit();
       })
@@ -134,9 +143,6 @@ export class ManageUserComponent implements OnInit{
       || this.userToEdit.role == null
       || this.userToEdit.name.replaceAll(' ', '') == ''
       || this.userToEdit.email.replaceAll(' ', '') == '';
-
-  }
-  allUsers(){
 
   }
 }

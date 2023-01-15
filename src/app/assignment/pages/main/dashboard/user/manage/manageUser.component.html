@@ -31,9 +31,7 @@
             <th>Action</th>
             <th></th>
             <th>
-              <button pButton class="p-button-plain p-button-success" (click)="showAddUserModalDialog()">
-              <i class="pi pi-user-plus"> {{addUserString}} </i>
-            </button>
+              <button pButton pRipple class="p-button-success" (click)="showAddUserModalDialog()" icon="pi pi-user-plus" label="{{addUserString}}"></button>
             </th>
           </tr>
         </ng-template>
@@ -151,6 +149,16 @@
   <ng-template pTemplate="footer">
     <button pButton pRipple icon="pi pi-times" class="p-button-text" label="Non" (click)="closeDeleteModal()"></button>
     <button pButton pRipple icon="pi pi-check" class="p-button-text p-button-danger" label="Oui" (click)="confirmDeleteUser()"></button>
+  </ng-template>
+</p-dialog>
+
+<p-dialog [(visible)]="displayModalNotification" header="Modification" [modal]="true" [style]="{width:'450px'}" [closable]="false">
+  <div class="flex align-items-center justify-content-center">
+    <i class="pi pi-check mr-3 green" style="font-size: 2rem"></i>
+    <span *ngIf="message" class="green">{{message}}</span>
+  </div>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple icon="pi pi-check" class="p-button-text" label="D'accord" (click)="closeModalModification()"></button>
   </ng-template>
 </p-dialog>
 
