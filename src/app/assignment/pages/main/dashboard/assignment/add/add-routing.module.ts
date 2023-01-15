@@ -12,6 +12,7 @@ RouterModule.forChild([
   {
     path: 'add',
     component: AddComponent,
+    canActivate: [LoginGuard],
     children: [
       {path: '', redirectTo: 'assignment', pathMatch: 'full'},
       {path: 'assignment', component: Assignment, canActivate: [LoginGuard]},

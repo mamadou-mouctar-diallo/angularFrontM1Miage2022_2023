@@ -7,6 +7,8 @@ import {URL} from "../../utils/utils";
 import jwt_decode from 'jwt-decode';
 import {ProtectService} from "../protect.service";
 import {an} from "chart.js/dist/chunks/helpers.core";
+import {ConfigService} from "../config.service";
+import {AssignmentService} from "../assignment/assignment.service";
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +16,7 @@ import {an} from "chart.js/dist/chunks/helpers.core";
 export class AuthService {
 
   displayModalAuthorization: boolean = false;
-  constructor(private router: Router, private http: HttpClient, private protectService: ProtectService) {
+  constructor(private router: Router, private http: HttpClient, private assignmentService: AssignmentService) {
 
   }
   makeSession(obj: any): Observable<any>{
@@ -67,6 +69,8 @@ export class AuthService {
 
   closeModalAuthorization(): void{
     this.displayModalAuthorization = false;
+    this.assignmentService.initConfigAssignmentToDelete();
+    this.assignmentService.initConfigAssignmentToEdit();
   }
   showAuthorization(): void{
     this.displayModalAuthorization = true;

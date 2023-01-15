@@ -16,7 +16,7 @@ import {ConfigService} from "../../services/config.service";
   `
 })
 
-export class Autorization {
+export class Authorization {
   constructor(public configService: ConfigService) {
   }
 

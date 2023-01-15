@@ -48,7 +48,7 @@ import {CalendarModule} from "primeng/calendar";
 import {StepsModule} from "primeng/steps";
 import {AddModule} from "./assignment/pages/main/dashboard/assignment/add/add.module";
 import {LoginGuard} from "./assignment/guards/login.guard";
-import {Autorization} from "./assignment/pages/main/autorization";
+import {Authorization} from "./assignment/pages/main/authorization";
 
 const routes: Routes = [
   {path: '', component: DashboardComponent, pathMatch: 'full'},
@@ -71,7 +71,7 @@ const routes: Routes = [
     UpdateComponent,
     LoaderComponent,
     ManageUserComponent,
-    Autorization,
+    Authorization,
   ],
     imports: [
         FormsModule,

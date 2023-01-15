@@ -14,6 +14,7 @@ export class DeleteComponent implements OnInit{
   modalDisplayed: boolean = false;
   displayModalDeletion: boolean = false;
   message!: string;
+  modalAutorization: boolean = false;
   @Output()
   finishToDelete: EventEmitter<boolean> = new EventEmitter<boolean>();
   constructor(private assignmentService: AssignmentService, public authService: AuthService) {
@@ -35,7 +36,6 @@ export class DeleteComponent implements OnInit{
         this.message = data.msg;
       }
       this.modalDisplayed = false;
-      this.assignmentService.initConfigAssignmentToDelete();
     })
 
   }
